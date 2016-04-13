@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.shine.dto.Opportunity" table="opportunity">
+		<id name="id" column="Id">
+			<generator class="native"></generator>
+		</id>
+		<property name="createTime" column="dtCreateTime"></property>
+		<property name="name" column="sName"></property>
+		<property name="englishName" column="sEnglishName"></property>
+		<property name="parentName" column="sParentName"></property>
+		<property name="contactTel1" column="sContactTel1"></property>
+		<property name="contactTel2" column="sContactTel2"></property>
+		<property name="gender" column="nGender"></property>
+		<property name="age" column="nAge"></property>
+		<property name="birthday" column="dtBirthday"></property>
+		<property name="address" column="sAddress"></property>
+		<property name="school" column="sSchool"></property>
+		<property name="email" column="sEmail"></property>
+		<property name="source" column="sSource"></property>
+		<property name="orderTime" column="dtOrderTime"></property>
+		<property name="isArrive" column="nIsArrive"></property>
+		<property name="arriveTime" column="dtArriveTime"></property>
+		<property name="isDeal" column="nIsDeal"></property>
+		<property name="followCS" column="sFollowCS"></property>
+	</class>
+</hibernate-mapping>

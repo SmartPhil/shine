@@ -14,5 +14,6 @@
 		<property name="show_sql">true</property>
 		
 		<mapping resource="com/shine/dto/User.hbm.xml"/>
+		<mapping resource="com/shine/dto/Opportunity.hbm.xml"/>
 	</session-factory> 
 </hibernate-configuration>

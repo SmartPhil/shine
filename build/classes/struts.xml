@@ -9,4 +9,11 @@
 			</result>
 		</action>
 	</package>
+	<package name="channel" extends="json-default">
+		<action name="addOpp" class="com.shine.action.Action_AddOpp" method="add">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+	</package>
 </struts>
