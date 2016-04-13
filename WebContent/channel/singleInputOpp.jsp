@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>商机分销系统</title>
+<title>I ShINE ENGLISH</title>
 <!-- css文件 -->
 <link href="<%=request.getContextPath() %>/bootstrap-3.3.4-dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 
@@ -55,10 +55,10 @@ $(document).ready(function(e){
 	HttpSession sessions = request.getSession();
 	Object username = sessions.getAttribute("username");
 %>
-<nav class="navbar navbar-default">
-	<div class="container-fluid">
+<nav class="navbar navbar-default navbar-fixed-top">
+	<div class="container-fluid" style="padding-top: 5px;">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="#">
+			<a class="navbar-brand" href="#" style="padding-top: 5px;">
         		<img alt="" src="<%=request.getContextPath()%>/img/index_logo.png">
       		</a>
 		</div>
@@ -74,7 +74,7 @@ $(document).ready(function(e){
 </nav>
 <br/>
 <div id="body">
-<div id="showSjInput" style="width: 60%;margin-left: auto;margin-right: auto;">
+<div id="showSjInput" style="width: 50%;margin-left: auto;margin-right: auto;">
 	<form id="sjForm">
 		<div class="form-group">
   			<p class="bg-primary">注意：带*号为必填项</p>	

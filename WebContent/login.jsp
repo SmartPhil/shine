@@ -22,10 +22,12 @@ $(document).ready(function(e){
 		
 		if(userName == ""){
 			alert("请输入用户名！");
+			$btn.button('reset');
 			return;
 		}
 		if(passWord == ""){
 			alert("请输入密码！");
+			$btn.button('reset');
 			return;
 		}
 		$.ajax({
