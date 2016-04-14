@@ -7,7 +7,7 @@ public class Opportunity {
 	private Date createTime;                //创建时间
 	private String name;					//学员姓名
 	private String englishName; 			//英文姓名
-	private int gender;						//性别
+	private int gender;						//性别 : 0--男；1--女
 	private int age;						//年龄
 	private String school;					//学校
 	private String contactTel1;				//联系方式1
@@ -22,6 +22,7 @@ public class Opportunity {
 	private int isDeal;						//是否成单
 	private Date birthday;					//生日
 	private String followCS;				//跟进人
+	private String creator;					//创建者
 	
 	public int getId() {
 		return id;
@@ -136,5 +137,11 @@ public class Opportunity {
 	}
 	public void setIsDeal(int isDeal) {
 		this.isDeal = isDeal;
+	}
+	public String getCreator() {
+		return creator;
+	}
+	public void setCreator(String creator) {
+		this.creator = creator;
 	}
 }

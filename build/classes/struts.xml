@@ -15,5 +15,17 @@
 				<param name="root">result</param>
 			</result>
 		</action>
+		<action name="downloadModal" class="com.shine.action.Action_DownLoadModal">
+			<result name="success" type="stream">
+				<param name="contentType">${mimeType}</param>
+				<param name="inputName">inStream</param>
+				<param name="contentDisposition">attachment;filename="uploadModal.xlsx"</param>
+			</result>
+		</action>
+		<action name="importExcelOpp" class="com.shine.action.Action_ImportExcelOpp" method="importExcel">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
 	</package>
 </struts>

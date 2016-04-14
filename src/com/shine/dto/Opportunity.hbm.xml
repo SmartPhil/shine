@@ -23,5 +23,6 @@
 		<property name="arriveTime" column="dtArriveTime"></property>
 		<property name="isDeal" column="nIsDeal"></property>
 		<property name="followCS" column="sFollowCS"></property>
+		<property name="creator" column="sCreator"></property>
 	</class>
 </hibernate-mapping>

@@ -74,7 +74,7 @@ $(document).ready(function(e){
 </nav>
 <br/>
 <div id="body">
-<div id="showSjInput" style="width: 50%;margin-left: auto;margin-right: auto;">
+<div id="showSjInput" style="width: 65%;margin-left: auto;margin-right: auto;">
 	<form id="sjForm">
 		<div class="form-group">
   			<p class="bg-primary">注意：带*号为必填项</p>	
