@@ -23,6 +23,7 @@ public class Opportunity {
 	private Date birthday;					//生日
 	private String followCS;				//跟进人
 	private String creator;					//创建者
+	private int isAssign;					//是否已分配:0--未分配；1--已分配
 	
 	public int getId() {
 		return id;
@@ -143,5 +144,11 @@ public class Opportunity {
 	}
 	public void setCreator(String creator) {
 		this.creator = creator;
+	}
+	public int getIsAssign() {
+		return isAssign;
+	}
+	public void setIsAssign(int isAssign) {
+		this.isAssign = isAssign;
 	}
 }

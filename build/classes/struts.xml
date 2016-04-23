@@ -28,4 +28,9 @@
 			</result>
 		</action>
 	</package>
+	<package name="service" extends="json-default">
+		<action name="getUnAssignOpp" class="com.shine.action.Action_GetUnAssignOpp" method="get">
+			<result name="success">/service/unassignopp.jsp</result>
+		</action>
+	</package>
 </struts>

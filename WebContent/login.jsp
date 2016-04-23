@@ -50,7 +50,7 @@ $(document).ready(function(e){
 						window.location.href = "channel/singleInputOpp.jsp";
 					}else if (role == '4') {
 						//客服（销售）
-						window.location.href = "";
+						window.location.href = "getUnAssignOpp.action";
 					}else if (role == '5') {
 						//老师
 						window.location.href = "";

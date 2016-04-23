@@ -24,5 +24,6 @@
 		<property name="isDeal" column="nIsDeal"></property>
 		<property name="followCS" column="sFollowCS"></property>
 		<property name="creator" column="sCreator"></property>
+		<property name="isAssign" column="nIsAssign"></property>
 	</class>
 </hibernate-mapping>
