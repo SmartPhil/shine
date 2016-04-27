@@ -32,5 +32,10 @@
 		<action name="getUnAssignOpp" class="com.shine.action.Action_GetUnAssignOpp" method="get">
 			<result name="success">/service/unassignopp.jsp</result>
 		</action>
+		<action name="reciveOppByCS" class="com.shine.action.Action_ReciveOppByCS" method="recive">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
 	</package>
 </struts>

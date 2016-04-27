@@ -19,6 +19,37 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	var table = $("#mainTable").DataTable({});
+	
+	$("#mainTable").on("click","button[name=recive]",function(){
+		var $btn = $(this).button("loading");
+		var td = $(this).parent();
+		var tr = $(td).parent();
+		var tds = $(tr).children("td");
+		$("#handle_stuNameTd").text($(tds[0]).text());
+		$.ajax({
+			url : 'reciveOppByCS.action',
+			type : 'post',
+			dataType : 'json',
+			data : {'name' : $("#nameShow").html().split(':')[1],'id' : $(tds[0]).text()},
+			success : function(e){
+				var data = eval("(" + e + ")");
+				if (data.result == "success") {
+					alert("接收成功！");
+					$btn.button("reset");
+				}else if (data.result == "fail") {
+					alert("接收失败！");
+					$btn.button("reset");
+				}else if (data.result == "recived") {
+					alert("已经被接取，请刷新页面！");
+					$btn.button("reset");
+				}
+			},
+			error : function(e){
+				alert("接收失败！请联系管理员！");
+				$btn.button("reset");
+			}
+		})
+	})
 });
 </script>
 </head>
@@ -36,7 +67,7 @@ $(document).ready(function(){
 		</div>
 		<div class="collapse navbar-collapse" style="margin-left: auto;margin-right: auto;width: 70%;">
 			<ul class="nav nav-pills">
-				<li role="presentation"><a href="#">欢迎您:<%=username %></a></li>
+				<li role="presentation"><a id="nameShow" href="#">欢迎您:<%=username %></a></li>
   				<li role="presentation" class="active"><a href="#">未分配商机</a></li>
   				<li role="presentation"><a href="#">我的商机</a></li>
 			</ul>
@@ -53,6 +84,7 @@ $(document).ready(function(){
 	<table style="width: 100%" aria-describedby="example_info" class="table table-striped table-bordered dataTable" id="mainTable">
 		<thead>
 			<tr>
+				<th>ID</th>
 				<th>学员姓名</th>
 				<th>家长姓名</th>
 				<th>联系方式1</th>
@@ -72,6 +104,7 @@ $(document).ready(function(){
 		%>
 		<% for(int i = 0; i < oppList.size(); i++){ %>
 			<tr>
+				<td><%=oppList.get(i).getId() %></td>
 				<td><%=oppList.get(i).getName() %></td>
 				<td><%=oppList.get(i).getParentName() %></td>
 				<td><%=oppList.get(i).getContactTel1() %></td>
@@ -98,13 +131,14 @@ $(document).ready(function(){
 					<td>已成单</td>
 				<%} %>
 				<td>
-					<button class="btn btn-primary" id="">接收</button>
+					<button class="btn btn-primary" id="" name="recive" data-loading-text="接收中">接收</button>
 				</td>
 			</tr>
 		<%} %>
 		</tbody>
 		<tfoot>
 			<tr>
+				<th>ID</th>
 				<th>学员姓名</th>
 				<th>家长姓名</th>
 				<th>联系方式1</th>

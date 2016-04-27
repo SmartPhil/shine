@@ -54,9 +54,9 @@ public class Action_ImportExcelOpp extends ActionSupport {
 						Opportunity opportunity = new Opportunity();
 						opportunity.setCreateTime(new Date());
 						opportunity.setName(line[0]);
-						if ("ÄĞ".equals(line[1])) {
+						if ("ç”·".equals(line[1])) {
 							opportunity.setGender(0);
-						}else if ("Å®".equals(line[1])) {
+						}else if ("å¥³".equals(line[1])) {
 							opportunity.setGender(1);
 						} 
 						if (!"".equals(line[2]) && line[2] != null) {
@@ -75,17 +75,17 @@ public class Action_ImportExcelOpp extends ActionSupport {
 						if(!"".equals(line[10]) && line[10] != null) {
 							opportunity.setOrderTime(sdf.parse(line[10]));
 						}
-						if("·ñ".equals(line[11])) {
+						if("å·²åˆ°åº—".equals(line[11])) {
 							opportunity.setIsArrive(0);
-						}else if ("ÊÇ".equals(line[11])) {
+						}else if ("æœªåˆ°åº—".equals(line[11])) {
 							opportunity.setIsArrive(1);
 						}
 						if(!"".equals(line[12]) && line[12] != null) {
 							opportunity.setArriveTime(sdf.parse(line[12]));
 						}
-						if("·ñ".equals(line[13])) {
+						if("æœªæˆå•".equals(line[13])) {
 							opportunity.setIsDeal(0);
-						}else if ("ÊÇ".equals(line[13])) {
+						}else if ("å·²æˆå•".equals(line[13])) {
 							opportunity.setIsDeal(1);
 						}
 						opportunity.setEnglishName(line[14]);
@@ -97,20 +97,20 @@ public class Action_ImportExcelOpp extends ActionSupport {
 					}
 					
 					OpportunityDao oppDao = new OpportunityDaoImpl();
-					//±£´æÉÌ»ú
+					//æ’å…¥æ•°æ®
 					for (Opportunity opp : oppList) {
 						oppDao.insertOpp(opp);
 					}
 					map.put("result", "success");
 				}else {
-					System.out.println("ÉÏ´«µÄÊÇ¿ÕÎÄ¼ş£¡");
+					System.out.println("ä¸è¦å¯¼å…¥ç©ºExcel");
 					map.put("result", "null");
 				}
 			}else {
 				map.put("result", "null");
 			}
 		} catch (Exception e) {
-			System.out.println("ÅúÁ¿ÉÏ´«ÉÌ»úÊ§°Ü£ºAction_XDFImportExcelOpp.java:" + e.getMessage());
+			System.out.println("æ‰¹é‡å¯¼å…¥å¤±è´¥:" + e.getMessage());
 			map.put("result", "fail");
 		}
 		result = JSON.toJSON(map);

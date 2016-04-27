@@ -46,8 +46,7 @@ public class Action_AddOpp extends ActionSupport {
 			try {
 				dtOrderTime = sdf.parse(orderTime);
 			} catch (Exception e) {
-				System.out.println("×ª»»Ô¤Ô¼Ê±¼äÊ§°Ü£º" + e.getMessage());
-				//²åÈëÊ§°Ü
+				System.out.println("è½¬æ¢é¢„çº¦æ—¶é—´å¤±è´¥ï¼š" + e.getMessage());
 			}
 		}
 		
@@ -57,8 +56,7 @@ public class Action_AddOpp extends ActionSupport {
 			try {
 				dtBirthday = sdf1.parse(birthday);
 			} catch (Exception e) {
-				System.out.println("×ª»»ÉúÈÕÊ§°Ü£º" + e.getMessage());
-				//²åÈëÊ§°Ü
+				System.out.println("è½¬æ¢ç”Ÿæ—¥å¤±è´¥ï¼š" + e.getMessage());
 			}
 		}
 		
@@ -83,10 +81,10 @@ public class Action_AddOpp extends ActionSupport {
 		boolean insertResult = oppDao.insertOpp(opportunity);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		if (insertResult) {
-			//²åÈë³É¹¦
+			//æ’å…¥æˆåŠŸ
 			map.put("result", "success");
 		}else {
-			//²åÈëÊ§°Ü
+			//æ’å…¥å¤±è´¥
 			map.put("result", "fail");
 		}
 		result = JSONObject.toJSONString(map);

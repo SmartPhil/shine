@@ -3,27 +3,27 @@ package com.shine.dto;
 import java.util.Date;
 
 public class Opportunity {
-	private int id;                         //Ë÷Òı
-	private Date createTime;                //´´½¨Ê±¼ä
-	private String name;					//Ñ§Ô±ĞÕÃû
-	private String englishName; 			//Ó¢ÎÄĞÕÃû
-	private int gender;						//ĞÔ±ğ : 0--ÄĞ£»1--Å®
-	private int age;						//ÄêÁä
-	private String school;					//Ñ§Ğ£
-	private String contactTel1;				//ÁªÏµ·½Ê½1
-	private String contactTel2;				//ÁªÏµ·½Ê½2
-	private String email;					//emailµØÖ·
-	private String parentName;				//¸¸Ä¸ĞÕÃû
-	private String address;					//¼ÒÍ¥×¡Ö·
-	private String source;					//ÉÌ»úÀ´Ô´
-	private Date orderTime;					//Ô¤Ô¼Ê±¼ä
-	private int isArrive;					//ÊÇ·ñµ½µê
-	private Date arriveTime;				//µ½µêÊ±¼ä
-	private int isDeal;						//ÊÇ·ñ³Éµ¥
-	private Date birthday;					//ÉúÈÕ
-	private String followCS;				//¸ú½øÈË
-	private String creator;					//´´½¨Õß
-	private int isAssign;					//ÊÇ·ñÒÑ·ÖÅä:0--Î´·ÖÅä£»1--ÒÑ·ÖÅä
+	private int id;                         //ç´¢å¼•
+	private Date createTime;                //åˆ›å»ºæ—¶é—´
+	private String name;					//å­¦ç”Ÿå§“å
+	private String englishName; 			//è‹±æ–‡å§“å
+	private int gender;					//æ€§åˆ«:0--ç”·ï¼›1--å¥³
+	private int age;						//å¹´é¾„
+	private String school;					//å­¦æ ¡
+	private String contactTel1;				//è”ç³»æ–¹å¼1
+	private String contactTel2;				//è”ç³»æ–¹å¼2
+	private String email;					//emailåœ°å€
+	private String parentName;				//çˆ¶æ¯å§“å
+	private String address;					//å®¶åº­ä½å€×¡
+	private String source;					//å•†æœºæ¥æº
+	private Date orderTime;					//é¢„çº¦æ—¶é—´
+	private int isArrive;					//æ˜¯å¦åˆ°åº—:0--æœªåˆ°åº—ï¼›1--å·²åˆ°åº—
+	private Date arriveTime;				//åˆ°åº—æ—¶é—´
+	private int isDeal;					//æ˜¯å¦å·²æˆå•
+	private Date birthday;					//ç”Ÿæ—¥
+	private String followCS;				//è·Ÿè¿›å®¢æœ
+	private String creator;					//åˆ›å»ºè€…
+	private int isAssign;					//æ˜¯å¦å·²åˆ†é…: 0--æœªåˆ†é…ï¼›1--å·²åˆ†é…
 	
 	public int getId() {
 		return id;

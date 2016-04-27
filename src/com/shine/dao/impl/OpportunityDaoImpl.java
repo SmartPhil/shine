@@ -42,7 +42,56 @@ public class OpportunityDaoImpl implements OpportunityDao {
 			session.close();
 			return oppList;
 		} catch (Exception e) {
-			System.out.println("��ѯδ�����̻�ʧ�ܣ�" + e.getMessage());
+			System.out.println("获取未分配商机失败：" + e.getMessage());
+			ts.rollback();
+			session.close();
+			return null;
+		}
+	}
+
+	@Override
+	public boolean updateOppFollowCSById(int id, String name) {
+		Session session = HibernateUtil.getCurrentSession();
+		Transaction ts = session.beginTransaction();
+		try {
+			String hql = "update Opportunity set followCS = ?,isAssign = 1 where id = ?";
+			Query query = session.createQuery(hql);
+			query.setString(0, name);
+			query.setInteger(1, id);
+			int result = query.executeUpdate();
+			ts.commit();
+			session.close();
+			if (result > 0) {
+				return true;
+			}else {
+				return false;
+			}
+		} catch (Exception e) {
+			System.out.println("更新商机跟进人失败：" + e.getMessage());
+			ts.rollback();
+			session.close();
+			return false;
+		}
+	}
+
+	@Override
+	public Opportunity getOppById(int id) {
+		Session session = HibernateUtil.getCurrentSession();
+		Transaction ts = session.beginTransaction();
+		try {
+			String hql = "from Opportunity where id = ?";
+			Query query = session.createQuery(hql);
+			query.setInteger(0, id);
+			List<Opportunity> oppList = query.list();
+			ts.commit();
+			session.close();
+			if(oppList.size() > 0) {
+				return oppList.get(0);
+			}else {
+				return null;
+			}
+		} catch (Exception e) {
+			System.out.println("通过id查询商机失败：" + e.getMessage());
 			ts.rollback();
 			session.close();
 			return null;

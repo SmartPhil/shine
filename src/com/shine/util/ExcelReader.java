@@ -13,33 +13,26 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class ExcelReader {
     private String inputfile = ""; 
-    
-    //¹¹Ôìº¯Êý´´½¨Ò»¸öExcelReader  
     public ExcelReader(String inputfile) {
     	this.inputfile = inputfile;
     }  
     
-    //¶ÁÈ¡XLS excelÊý¾Ý
     public List<String[]> readXLSAllData(){
-    	//½á¹ûÁÐ±í
     	List<String[]> result = new ArrayList<String[]>();
     	try {
     		FileInputStream fileInputStream = new FileInputStream(inputfile);
     		HSSFWorkbook workbook = new HSSFWorkbook(fileInputStream);
         	HSSFSheet sheet = workbook.getSheetAt(0);
-        	//µÃµ½ÎÄ¼þ×îºóÒ»ÐÐµÄnumÖµ
         	int rowNum = sheet.getLastRowNum() + 1;
         	if(rowNum > 1){
         		for (int i = 1; i < rowNum; i++) {
         			Row row = sheet.getRow(i);
-        			//ÅÐ¶Ïµç»°ºÅÂë1ÊÇ·ñÎª¿Õ£¬ÈôÎª¿ÕÔòºöÂÔ´ËÐÐ¡£
         			Cell cell2 = row.getCell(3);
         			if(cell2 != null){
         				cell2.setCellType(Cell.CELL_TYPE_STRING);
             			if("".equals(cell2.getStringCellValue().trim()) || cell2.getStringCellValue() == null){
             				continue;
             			}else {
-            				//Èôµç»°ºÅÂë1²»Îª¿Õ£¬Ôò¿ªÊ¼¶ÁÈ¡´ËÐÐÊý¾Ý¡£
             				String[] onelineString = new String[16];
             				for (int j = 0; j < 16; j++) {
             					String cellvalue = "";
@@ -89,32 +82,27 @@ public class ExcelReader {
         	fileInputStream.close();
         	workbook.close();
 		} catch (Exception e) {
-			System.out.println("¶ÁÈ¡XLS-ExcelÎÄ¼þÊ§°Ü£º" + e.getMessage());
+			System.out.println("è¯»å–excelæ–‡ä»¶å¤±è´¥ï¼š" + e.getMessage());
 		}
     	return result;
     }
     
-    //¶ÁÈ¡XLSX excelÊý¾Ý
     public List<String[]> readXLSXAllData(){
-    	//½á¹ûÁÐ±í
     	List<String[]> result = new ArrayList<String[]>();
     	try {
     		FileInputStream fileInputStream = new FileInputStream(inputfile);
     		XSSFWorkbook workbook = new XSSFWorkbook(fileInputStream);
         	XSSFSheet sheet = workbook.getSheetAt(0);
-        	//µÃµ½ÎÄ¼þ×îºóÒ»ÐÐµÄnumÖµ
         	int rowNum = sheet.getLastRowNum() + 1;
         	if(rowNum > 1){
         		for (int i = 1; i < rowNum; i++) {
         			Row row = sheet.getRow(i);
-        			//ÅÐ¶Ïµç»°ºÅÂë1ÊÇ·ñÎª¿Õ£¬ÈôÎª¿ÕÔòºöÂÔ´ËÐÐ¡£
         			Cell cell2 = row.getCell(3);
         			if(cell2 != null){
         				cell2.setCellType(Cell.CELL_TYPE_STRING);
             			if("".equals(cell2.getStringCellValue().trim()) || cell2.getStringCellValue() == null){
             				continue;
             			}else {
-            				//Èôµç»°ºÅÂë1²»Îª¿Õ£¬Ôò¿ªÊ¼¶ÁÈ¡´ËÐÐÊý¾Ý¡£
             				String[] onelineString = new String[16];
             				for (int j = 0; j < 16; j++) {
             					String cellvalue = "";
@@ -164,7 +152,7 @@ public class ExcelReader {
         	fileInputStream.close();
         	workbook.close();
 		} catch (Exception e) {
-			System.out.println("¶ÁÈ¡XLSX-ExcelÎÄ¼þÊ§°Ü£º" + e.getMessage());
+			System.out.println("è¯»å–excelæ–‡ä»¶å¤±è´¥ï¼š" + e.getMessage());
 		}
     	return result;
     }

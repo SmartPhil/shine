@@ -6,15 +6,29 @@ import com.shine.dto.Opportunity;
 
 public interface OpportunityDao {
 	/**
-	 * ²åÈëĞÂµÄÉÌ»ú
+	 * æ’å…¥å•†æœº
 	 * @param opportunity
-	 * @return boolean ÊÇ·ñ²åÈë³É¹¦
+	 * @return boolean æ’å…¥ç»“æœ
 	 */
 	public boolean insertOpp(Opportunity opportunity);
 	
 	/**
-	 * »ñÈ¡ËùÓĞÎ´·ÖÅäµÄÉÌ»ú
-	 * @return List<Opportunity> ÉÌ»úÁĞ±í
+	 * è·å–æœªåˆ†é…å•†æœº
+	 * @return List<Opportunity> æœªåˆ†é…å•†æœºåˆ—è¡¨
 	 */
 	public List<Opportunity> getUnAssignOpp();
+	
+	/**
+	 * é€šè¿‡idæ›´æ–°å•†æœºè·Ÿè¿›äºº
+	 * @param id
+	 * @return æ›´æ–°ç»“æœ
+	 */
+	public boolean updateOppFollowCSById(int id, String name);
+	
+	/**
+	 * é€šè¿‡idæŸ¥è¯¢å•†æœº
+	 * @param id
+	 * @return è¿”å›çš„å•†æœº
+	 */
+	public Opportunity getOppById(int id);
 }
