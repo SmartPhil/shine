@@ -4,7 +4,7 @@ import com.shine.dto.User;
 
 public interface UserDao {
 	/**
-	 * 通过用户名以及密码查找用户
+	 * 閫氳繃鐢ㄦ埛鍚嶄互鍙婂瘑鐮佹煡璇㈢敤鎴稶ser
 	 * @param username
 	 * @param password
 	 * @return User

@@ -22,10 +22,12 @@ $(document).ready(function(e){
 		
 		if(userName == ""){
 			alert("请输入用户名！");
+			$btn.button('reset');
 			return;
 		}
 		if(passWord == ""){
 			alert("请输入密码！");
+			$btn.button('reset');
 			return;
 		}
 		$.ajax({
@@ -37,7 +39,22 @@ $(document).ready(function(e){
 				var loginResult = info.loginResult;
 				if(loginResult == "success"){
 					var role = info.role;
-					alert("登陆成功！角色是：" + role);
+					if(role == '1'){
+						//校长
+						window.location.href = "";
+					}else if (role == '2') {
+						//教师主管
+						window.location.href = "";
+					}else if (role == '3') {
+						//渠道（行政或市场）
+						window.location.href = "channel/singleInputOpp.jsp";
+					}else if (role == '4') {
+						//客服（销售）
+						window.location.href = "getUnAssignOpp.action";
+					}else if (role == '5') {
+						//老师
+						window.location.href = "";
+					}
 					$btn.button('reset');
 				}else{
 					alert("登陆失败！用户名或密码错误！");
@@ -68,7 +85,7 @@ $(document).ready(function(e){
 		<div class="form-group">	
 			<div class="input-group">
   				<span class="input-group-addon">密&nbsp;&nbsp; 码</span>
-  				<input id="password" name="password" type="text" class="form-control" placeholder="请输入密码" aria-describedby="sizing-addon1">
+  				<input id="password" name="password" type="password" class="form-control" placeholder="请输入密码" aria-describedby="sizing-addon1">
 			</div>
 		</div>
 		<div class="form-group">
