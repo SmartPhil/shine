@@ -15,7 +15,6 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public User getUser(String username, String password) {
-		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		try {
@@ -41,4 +40,48 @@ public class UserDaoImpl implements UserDao {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<User> getCSUser() {
+		Session session = HibernateUtil.getCurrentSession();
+		Transaction transaction = session.beginTransaction();
+		try {
+			String hql = "from User where role = 4";
+			Query query = session.createQuery(hql);
+			List<User> users = (ArrayList<User>)query.list();
+			transaction.commit();
+			session.close();
+			return users;
+		} catch (Exception e) {
+			System.out.println("查询所有客服用户失败：" + e.getMessage());
+			transaction.rollback();
+			session.close();
+			return null;
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public User getUserById(int id) {
+		Session session = HibernateUtil.getCurrentSession();
+		Transaction transaction = session.beginTransaction();
+		try {
+			String hql = "from User where id = ?";
+			Query query = session.createQuery(hql);
+			query.setInteger(0, id);
+			List<User> users = (ArrayList<User>)query.list();
+			transaction.commit();
+			session.close();
+			if (users.size() >= 0) {
+				return users.get(0);
+			}else {
+				return null;
+			}
+		} catch (Exception e) {
+			System.out.println("通过id查询用户失败：" + e.getMessage());
+			transaction.rollback();
+			session.close();
+			return null;
+		}
+	}
 }

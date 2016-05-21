@@ -143,4 +143,29 @@ public class OpportunityDaoImpl implements OpportunityDao {
 			return false;
 		}
 	}
+
+	@Override
+	public boolean assignOpp(int oppId, String CSName) {
+		Session session = HibernateUtil.getCurrentSession();
+		Transaction ts = session.beginTransaction();
+		try {
+			String hql = "update Opportunity set isAssign = 1,followCS = ? where id = ?";
+			Query query = session.createQuery(hql);
+			query.setString(0, CSName);
+			query.setInteger(1, oppId);
+			int result = query.executeUpdate();
+			ts.commit();
+			session.close();
+			if (result >= 0) {
+				return true;
+			}else {
+				return false;
+			}
+		} catch (Exception e) {
+			System.out.println("分配商机失败：" + e.getMessage());
+			ts.rollback();
+			session.close();
+			return false;
+		}
+	}
 }

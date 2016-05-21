@@ -58,4 +58,19 @@
 			</result>
 		</action>
 	</package>
+	<package name="president" extends="json-default">
+		<action name="getUnAssignOppPresident" class="com.shine.action.Action_GetUnAssignOpp_President" method="get">
+			<result name="success">/president/main.jsp</result>
+		</action>
+		<action name="getCSUser" class="com.shine.action.Action_GetCSUser" method="getCSUser">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<action name="assignOpp" class="com.shine.action.Action_AssignOppPresident" method="assign">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+	</package>
 </struts>

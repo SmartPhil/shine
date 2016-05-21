@@ -41,7 +41,7 @@ $(document).ready(function(e){
 					var role = info.role;
 					if(role == '1'){
 						//校长
-						window.location.href = "";
+						window.location.href = "getUnAssignOppPresident.action";
 					}else if (role == '2') {
 						//教师主管
 						window.location.href = "";

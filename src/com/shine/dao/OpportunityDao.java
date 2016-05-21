@@ -45,4 +45,12 @@ public interface OpportunityDao {
 	 * @return 释放结果
 	 */
 	public boolean releaseOpp(int oppId);
+	
+	/**
+	 * 分配商机
+	 * @param oppId 商机id
+	 * @param CSName 客服用户名
+	 * @return 分配结果
+	 */
+	public boolean assignOpp(int oppId, String CSName);
 }
