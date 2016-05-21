@@ -24,8 +24,8 @@ $(document).ready(function(e){
 		success : function(e){
 			table.clear().draw(false);
 			var data = eval("(" + e + ")");
-			var operationRow = "<button name=\"follow\" class=\"btn btn-primary\">跟进</button>"
-							   + "<button name=\"release\">释放</button>";
+			var operationRow = "<button name=\"follow\" class=\"btn btn-primary\">跟进</button>&nbsp;"
+							   + "<button name=\"release\" class=\"btn btn-primary\">释放</button>";
 			for (var i = 0; i < data.length; i++) {
 				var obj = [
 				           data[i].id,data[i].stuName,data[i].parentName,data[i].contactTel1,
@@ -103,32 +103,30 @@ $(document).ready(function(e){
 		});
 	});
 	
-	$("mainTable tbody").on("click","button[name='release']",function(e){
+	$("#mainTable").on("click","button[name='release']",function(e){
 		if (confirm("确定释放吗？")) {
 			var td = $(this).parent();
 			var tr = $(td).parent();
 			var tds = $(tr).children("td");
 			
-			/* $.ajax({
-				url : 'getFollowContentByOppId.action',
+			$.ajax({
+				url : 'releaseOpp.action',
 				type : 'post',
 				data : {'oppId' : $(tds[0]).text()},
 				dataType : 'json',
 				success : function(e){
-					$("#followContentTable tbody").html("");
 					var data = eval("(" + e + ")");
-					for(var i = 0; i < data.length; i++){
-						$("#followContentTable tbody").append("<tr>"
-								+ "<td>" + data[i].followTime + "</td>"
-								+ "<td>" + data[i].followContent + "</td>"
-								+ "<td>" + data[i].follower + "</td>"
-								+ "</tr>")
+					var result = data.result;
+					if (result == "success") {
+						alert("释放成功！");
+					}else {
+						alert("释放失败！");
 					}
 				},
 				error : function(e){
 					alert("系统出错！请联系管理员！");
 				}
-			}); */
+			}); 
 		}else {
 			return;
 		}

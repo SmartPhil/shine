@@ -52,5 +52,10 @@
 				<param name="root">result</param>
 			</result>
 		</action>
+		<action name="releaseOpp" class="com.shine.action.Action_ReleaseOpp" method="releaseOpp">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
 	</package>
 </struts>

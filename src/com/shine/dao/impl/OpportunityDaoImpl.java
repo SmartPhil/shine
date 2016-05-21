@@ -74,6 +74,7 @@ public class OpportunityDaoImpl implements OpportunityDao {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Opportunity getOppById(int id) {
 		Session session = HibernateUtil.getCurrentSession();
@@ -98,6 +99,7 @@ public class OpportunityDaoImpl implements OpportunityDao {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Opportunity> getOppByCS(String csName) {
 		Session session = HibernateUtil.getCurrentSession();
@@ -115,6 +117,30 @@ public class OpportunityDaoImpl implements OpportunityDao {
 			ts.rollback();
 			session.close();
 			return null;
+		}
+	}
+
+	@Override
+	public boolean releaseOpp(int oppId) {
+		Session session = HibernateUtil.getCurrentSession();
+		Transaction ts = session.beginTransaction();
+		try {
+			String hql = "update Opportunity set isAssign = 0,followCS = '' where id = ?";
+			Query query = session.createQuery(hql);
+			query.setInteger(0, oppId);
+			int result = query.executeUpdate();
+			ts.commit();
+			session.close();
+			if (result >= 0) {
+				return true;
+			}else {
+				return false;
+			}
+		} catch (Exception e) {
+			System.out.println("释放商机失败：" + e.getMessage());
+			ts.rollback();
+			session.close();
+			return false;
 		}
 	}
 }

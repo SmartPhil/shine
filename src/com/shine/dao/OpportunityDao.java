@@ -38,4 +38,11 @@ public interface OpportunityDao {
 	 * @return List<Opportunity>
 	 */
 	public List<Opportunity> getOppByCS(String csName);
+	
+	/**
+	 * 客服释放商机
+	 * @param oppId
+	 * @return 释放结果
+	 */
+	public boolean releaseOpp(int oppId);
 }
