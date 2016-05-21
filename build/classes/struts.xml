@@ -37,5 +37,20 @@
 				<param name="root">result</param>
 			</result>
 		</action>
+		<action name="getMyOppByCS" class="com.shine.action.Action_GetMyOpp_CS" method="getMyOpp">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<action name="getFollowContentByOppId" class="com.shine.action.Action_GetFollowContentByOppId" method="getFollowContentByOppId">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<action name="insertFollowContent" class="com.shine.action.Action_InsertFollowContent" method="insertFollowContent">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
 	</package>
 </struts>

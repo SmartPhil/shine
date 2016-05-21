@@ -36,6 +36,7 @@ $(document).ready(function(){
 				if (data.result == "success") {
 					alert("接收成功！");
 					$btn.button("reset");
+					window.location.reload();
 				}else if (data.result == "fail") {
 					alert("接收失败！");
 					$btn.button("reset");
@@ -69,7 +70,7 @@ $(document).ready(function(){
 			<ul class="nav nav-pills">
 				<li role="presentation"><a id="nameShow" href="#">欢迎您:<%=username %></a></li>
   				<li role="presentation" class="active"><a href="#">未分配商机</a></li>
-  				<li role="presentation"><a href="#">我的商机</a></li>
+  				<li role="presentation"><a href="<%=request.getContextPath() %>/service/myopp.jsp">我的商机</a></li>
 			</ul>
 		</div>
 		<div class="navbar-footer"></div>
@@ -80,7 +81,7 @@ $(document).ready(function(){
 <br/>
 <br/>
 <div id="dataShowDiv" class="panel panel-primary" style="width: 90%;margin-left: auto;margin-right: auto;white-space:nowrap;">
-	<div class="panel-heading">未处理商机</div>
+	<div class="panel-heading">未分配商机</div>
 	<table style="width: 100%" aria-describedby="example_info" class="table table-striped table-bordered dataTable" id="mainTable">
 		<thead>
 			<tr>

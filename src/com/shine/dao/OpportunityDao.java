@@ -31,4 +31,11 @@ public interface OpportunityDao {
 	 * @return 返回的商机
 	 */
 	public Opportunity getOppById(int id);
+	
+	/**
+	 * 通过客服用户名查询当前客服所跟进的商机
+	 * @param csName
+	 * @return List<Opportunity>
+	 */
+	public List<Opportunity> getOppByCS(String csName);
 }

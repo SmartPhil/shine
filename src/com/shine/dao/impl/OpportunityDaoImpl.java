@@ -97,4 +97,24 @@ public class OpportunityDaoImpl implements OpportunityDao {
 			return null;
 		}
 	}
+
+	@Override
+	public List<Opportunity> getOppByCS(String csName) {
+		Session session = HibernateUtil.getCurrentSession();
+		Transaction ts = session.beginTransaction();
+		try {
+			String hql = "from Opportunity where followCS = ?";
+			Query query = session.createQuery(hql);
+			query.setString(0, csName);
+			List<Opportunity> oppList = query.list();
+			ts.commit();
+			session.close();
+			return oppList;
+		} catch (Exception e) {
+			System.out.println("通过客服用户名查询商机失败：" + e.getMessage());
+			ts.rollback();
+			session.close();
+			return null;
+		}
+	}
 }
