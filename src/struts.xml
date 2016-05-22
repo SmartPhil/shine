@@ -72,5 +72,10 @@
 				<param name="root">result</param>
 			</result>
 		</action>
+		<action name="getUser" class="com.shine.action.Action_GetUserList_President" method="getUser">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
 	</package>
 </struts>

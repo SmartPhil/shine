@@ -84,4 +84,36 @@ public class UserDaoImpl implements UserDao {
 			return null;
 		}
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<User> getUserByUserNameAndRole(String username, int role) {
+		Session session = HibernateUtil.getCurrentSession();
+		Transaction transaction = session.beginTransaction();
+		try {
+			String hql = "from User where 1=1";
+			if (!"".equals(username) && username != null) {
+				hql += " and username = :username";
+			}
+			if (role != 0) {
+				hql += " and role = :role";
+			}
+			Query query = session.createQuery(hql);
+			if (!"".equals(username) && username != null) {
+				query.setString("username", username);
+			}
+			if (role != 0) {
+				query.setInteger("role", role);
+			}
+			List<User> users = (ArrayList<User>)query.list();
+			transaction.commit();
+			session.close();
+			return users;
+		} catch (Exception e) {
+			System.out.println("通过用户名和角色查询用户失败：" + e.getMessage());
+			transaction.rollback();
+			session.close();
+			return null;
+		}
+	}
 }

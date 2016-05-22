@@ -25,4 +25,12 @@ public interface UserDao {
 	 * @return User
 	 */
 	public User getUserById(int id);
+	
+	/**
+	 * 通过用户名和角色查询用户
+	 * @param username
+	 * @param role
+	 * @return List<User>
+	 */
+	public List<User> getUserByUserNameAndRole(String username, int role);
 }
