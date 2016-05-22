@@ -77,5 +77,15 @@
 				<param name="root">result</param>
 			</result>
 		</action>
+		<action name="usernameIsExiste" class="com.shine.action.Action_UsernameIsExiste" method="isExiste">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<action name="addUser" class="com.shine.action.Action_AddUser_President" method="addUser">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
 	</package>
 </struts>

@@ -38,6 +38,66 @@ $(document).ready(function(e){
 			}
 		});
 	});
+	
+	$("#addUserBtn").click(function(e){
+		$("#addUserModal").modal({
+			keyboard : true
+		});
+	});
+	
+	$("#add_username").blur(function(e){
+		var username = $(this).val();
+		$.ajax({
+			url : 'usernameIsExiste.action',
+			type : 'post',
+			data : {'username' : username},
+			datatype : 'json',
+			success : function(e){
+				var data = eval("(" + e + ")");
+				var result = data.result;
+				if (result == "fail") {
+					alert("此用户名已存在！");
+					$("#add_username").focus();
+				}
+			},
+			error : function(e){
+				alert("系统出错！请联系管理员！");
+			}
+		});
+	});
+	
+	$("#add_confirmpassword").blur(function(e){
+		var password = $("#add_password").val();
+		var confirmpassword = $("#add_confirmpassword").val();
+		
+		if (password != confirmpassword) {
+			alert("密码不一致！请重新输入！");
+			return;
+		}
+	});
+	
+	$("#btn_submitAdd").click(function(e){
+		$.ajax({
+			url : 'addUser.action',
+			type : 'post',
+			data : $("#addform").serialize(),
+			dataType : 'json',
+			success : function(e){
+				var data = eval("(" + e + ")");
+				var result = data.result;
+				if (result == "had") {
+					alert("添加失败！用户名已存在！");
+				}else if (result == "success") {
+					alert("添加成功！");
+				}else if (result == "fail") {
+					alert("添加失败！");
+				}
+			},
+			error : function(e){
+				alert("系统出错！请联系管理员！");
+			}
+		});
+	});
 });
 </script>
 </head>
@@ -116,6 +176,46 @@ $(document).ready(function(e){
 			</tr>
 		</tfoot>
 	</table>
+</div>
+<!-- Add Modal -->
+<div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">添加用户</h4>
+      </div>
+      <div class="modal-body"> 
+       	<form id="addform">
+  			<div class="form-group">
+    			<label for="username">用户名</label>
+    			<input type="text" class="form-control" id="add_username" name="username" placeholder="用户名">
+  			</div>
+  			<div class="form-group">
+    			<label for="password">密码</label>
+    			<input type="password" class="form-control" id="add_password" name="password" placeholder="密码">
+  			</div>
+  			<div class="form-group">
+    			<label for="password">确认密码</label>
+    			<input type="password" class="form-control" id="add_confirmpassword" name="confirmpassword" placeholder="确认密码">
+  			</div>
+  			<div class="form-group">
+    			<label for="exampleInputPassword1">角色</label>
+    			<select class="form-control" id="add_role" name="role">
+  					<option value="2">教师主管</option>
+  					<option value="3">行政人员</option>
+  					<option value="4">客服人员</option>
+  					<option value="5">老师</option>
+				</select>
+  			</div>
+		</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" id="btn_submitAdd" class="btn btn-primary">提交</button>
+      </div>
+    </div>
+  </div>
 </div>
 </body>
 </html>

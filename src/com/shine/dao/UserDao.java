@@ -33,4 +33,18 @@ public interface UserDao {
 	 * @return List<User>
 	 */
 	public List<User> getUserByUserNameAndRole(String username, int role);
+	
+	/**
+	 * 通过用户名查询用户
+	 * @param username
+	 * @return List<user>
+	 */
+	public List<User> getUserByUsername(String username);
+	
+	/**
+	 * 插入用户
+	 * @param user
+	 * @return 插入结果
+	 */
+	public boolean insertUser(User user);
 }

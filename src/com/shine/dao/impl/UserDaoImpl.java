@@ -116,4 +116,39 @@ public class UserDaoImpl implements UserDao {
 			return null;
 		}
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<User> getUserByUsername(String username) {
+		Session session = HibernateUtil.getCurrentSession();
+		Transaction transaction = session.beginTransaction();
+		try {
+			String hql = "from User where username = ?";
+			Query query = session.createQuery(hql);
+			query.setString(0, username);
+			List<User> users = (ArrayList<User>)query.list();
+			transaction.commit();
+			session.close();
+			return users;
+		} catch (Exception e) {
+			System.out.println("通过用户名查询用户失败：" + e.getMessage());
+			transaction.rollback();
+			session.close();
+			return null;
+		}
+	}
+
+	@Override
+	public boolean insertUser(User user) {
+		Session session = HibernateUtil.getCurrentSession();
+		Transaction transaction = session.beginTransaction();
+		Integer result = (Integer)session.save(user);
+		transaction.commit();
+		session.close();
+		if (result.intValue() >= 0) {
+			return true;
+		}else {
+			return false;
+		}
+	}
 }
