@@ -168,4 +168,19 @@ public class UserDaoImpl implements UserDao {
 			return false;
 		}
 	}
+
+	@Override
+	public boolean modifyUser(User user) {
+		try {
+			Session session = HibernateUtil.getCurrentSession();
+			Transaction transaction = session.beginTransaction();
+			session.update(user);
+			transaction.commit();
+			session.close();
+			return true;
+		} catch (Exception e) {
+			System.out.println("修改用户失败：" + e.getMessage());
+			return false;
+		}
+	}
 }

@@ -26,8 +26,8 @@ $(document).ready(function(e){
 			success : function(e){
 				table.clear().draw(false);
 				var data = eval("(" + e + ")");
-				var operation = "<button name=\"deleteUser\" class=\"btn btn-primary\">删除</button>&nbsp;" + 
-								"<button name=\"modifyUser\" class=\"btn btn-primary\">修改</button>"
+				var operation = "<button name=\"deleteUser\" class=\"btn btn-primary\">删除用户</button>&nbsp;" + 
+								"<button name=\"modifyUser\" class=\"btn btn-primary\">修改密码</button>"
 				for (var i = 0; i < data.length; i++) {
 					var obj = [data[i].id,data[i].username,data[i].role,operation];
 					table.row.add(obj).draw(false);
@@ -129,6 +129,58 @@ $(document).ready(function(e){
 		}
 	});
 	
+	$("#mainTable").on("click","button[name='modifyUser']",function(e){
+		var td = $(this).parent();
+		var tr = $(td).parent();
+		var tds = $(tr).children("td");
+		
+		var id = $(tds[0]).text();
+		var username = $(tds[1]).text();
+		
+		$("#modify_id").val(id);
+		$("#modify_username").val(username);
+		
+		$("#modifyUserModal").modal({
+			keyboard : true
+		});
+	});
+	
+	$("#btn_submitModify").click(function(e){
+		var password = $("#modify_newPassword").val();
+		var confirmPassword = $("#modify_confirmPassword").val();
+		if (password != confirmPassword) {
+			alert("两次密码输入不一致！请重新输入！");
+			return;
+		}
+		if (password == null || password == "") {
+			alert("密码不能为空！");
+			return;
+		}
+		$.ajax({
+			url : 'modifyUser.action',
+			type : 'post',
+			data : {
+						'id' : $("#modify_id").val(),
+						'newPassword' : $("#modify_newPassword").val(),
+						'originalPassword' : $("#modify_originalPassword").val()
+					},
+			dataType : 'json',
+			success : function(e){
+				var data = eval("(" + e + ")");
+				var result = data.result;
+				if (result == "success") {
+					alert("修改成功！");
+				}else if (result == "fail") {
+					alert("修改失败！");
+				}else if (result == "originalPswNotCorrect") {
+					alert("原密码错误！请确认！");
+				}
+			},
+			error : function(e){
+				alert("系统出错！请联系管理员！");
+			}
+		});
+	});
 });
 </script>
 </head>
@@ -244,6 +296,46 @@ $(document).ready(function(e){
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
         <button type="button" id="btn_submitAdd" class="btn btn-primary">提交</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- modify modal -->
+<div class="modal fade" id="modifyUserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">修改密码</h4>
+      </div>
+      <div class="modal-body"> 
+       	<form id="modifyForm">
+       		<div class="form-group">
+    			<label for="modify_id">id</label>
+    			<input type="text" class="form-control" id="modify_id" name="id" disabled>
+  			</div>
+  			<div class="form-group">
+    			<label for="modify_username">用户名</label>
+    			<input type="text" class="form-control" id="modify_username" name="username" disabled>
+  			</div>
+  			<div class="form-group">
+    			<label for="modify_originalPassword">原密码</label>
+    			<input type="password" class="form-control" id="modify_originalPassword" name="originalPassword" placeholder="原密码">
+  			</div>
+  			<div class="form-group">
+    			<label for="modify_newPassword">新密码</label>
+    			<input type="password" class="form-control" id="modify_newPassword" name="newPassword" placeholder="新密码">
+  			</div>
+  			<div class="form-group">
+    			<label for="exampleInputPassword1">确认密码</label>
+    			<input type="password" class="form-control" id="modify_confirmPassword" name="confirmPassword" placeholder="确认密码">
+  			</div>
+		</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" id="btn_submitModify" class="btn btn-primary">提交</button>
       </div>
     </div>
   </div>

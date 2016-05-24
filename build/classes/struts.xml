@@ -92,5 +92,10 @@
 				<param name="root">result</param>
 			</result>
 		</action>
+		<action name="modifyUser" class="com.shine.action.Action_ModifyPassword_President" method="modify">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
 	</package>
 </struts>

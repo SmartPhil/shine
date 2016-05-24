@@ -54,4 +54,11 @@ public interface UserDao {
 	 * @return 删除结果
 	 */
 	public boolean deleteUser(int id);
+	
+	/**
+	 * 修改用户信息
+	 * @param user
+	 * @return 修改结果
+	 */
+	public boolean modifyUser(User user);
 }
