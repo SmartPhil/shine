@@ -47,4 +47,11 @@ public interface UserDao {
 	 * @return 插入结果
 	 */
 	public boolean insertUser(User user);
+	
+	/**
+	 * 通过用户id删除用户
+	 * @param id
+	 * @return 删除结果
+	 */
+	public boolean deleteUser(int id);
 }

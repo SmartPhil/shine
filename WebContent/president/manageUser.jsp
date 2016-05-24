@@ -26,8 +26,8 @@ $(document).ready(function(e){
 			success : function(e){
 				table.clear().draw(false);
 				var data = eval("(" + e + ")");
-				var operation = "<button name=\"delete\" class=\"btn btn-primary\">删除</button>&nbsp;" + 
-								"<button name=\"modify\" class=\"btn btn-primary\">修改</button>"
+				var operation = "<button name=\"deleteUser\" class=\"btn btn-primary\">删除</button>&nbsp;" + 
+								"<button name=\"modifyUser\" class=\"btn btn-primary\">修改</button>"
 				for (var i = 0; i < data.length; i++) {
 					var obj = [data[i].id,data[i].username,data[i].role,operation];
 					table.row.add(obj).draw(false);
@@ -98,6 +98,37 @@ $(document).ready(function(e){
 			}
 		});
 	});
+	
+	$("#mainTable").on("click","button[name='deleteUser']",function(e){
+		if(confirm("确定删除用户吗？")) {
+			var td = $(this).parent();
+			var tr = $(td).parent();
+			var tds = $(tr).children("td");
+			var id = $(tds[0]).text();
+			$.ajax({
+				url : 'deleteUser.action',
+				type : 'post',
+				data : {'id' : id},
+				dataType : 'json',
+				success : function(e){
+					var data = eval("(" + e + ")");
+					var result = data.result;
+					if (result == "success") {
+						alert("删除成功！");
+						window.location.reload();
+					}else {
+						alert("删除失败！");
+					}
+				},
+				error : function(e){
+					alert("系统出错！请联系管理员！");
+				}
+			});
+		}else {
+			return;
+		}
+	});
+	
 });
 </script>
 </head>

@@ -151,4 +151,21 @@ public class UserDaoImpl implements UserDao {
 			return false;
 		}
 	}
+
+	@Override
+	public boolean deleteUser(int id) {
+		Session session = HibernateUtil.getCurrentSession();
+		Transaction transaction = session.beginTransaction();
+		String hql = "delete from User where id = ?";
+		Query query = session.createQuery(hql);
+		query.setInteger(0, id);
+		int result = query.executeUpdate();
+		transaction.commit();
+		session.close();
+		if (result >= 0) {
+			return true;
+		}else {
+			return false;
+		}
+	}
 }

@@ -87,5 +87,10 @@
 				<param name="root">result</param>
 			</result>
 		</action>
+		<action name="deleteUser" class="com.shine.action.Action_DeleteUser_President" method="delete">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
 	</package>
 </struts>
