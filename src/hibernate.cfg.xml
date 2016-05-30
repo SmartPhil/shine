@@ -16,5 +16,6 @@
 		<mapping resource="com/shine/dto/User.hbm.xml"/>
 		<mapping resource="com/shine/dto/Opportunity.hbm.xml"/>
 		<mapping resource="com/shine/dto/FollowContent.hbm.xml"/>
+		<mapping resource="com/shine/dto/ShineClass.hbm.xml"/>
 	</session-factory> 
 </hibernate-configuration>
