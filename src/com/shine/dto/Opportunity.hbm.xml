@@ -27,5 +27,6 @@
 		<property name="isAssign" column="nIsAssign"></property>
 		<property name="continueClass" column="continueClass"></property>
 		<property name="comment" column="comment"></property>
+		<property name="classCode" column="classCode"></property>
 	</class>
 </hibernate-mapping>

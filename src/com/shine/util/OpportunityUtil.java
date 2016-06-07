@@ -144,6 +144,12 @@ public class OpportunityUtil {
 			}else {
 				map.put("comment", "无");
 			}
+			//班级编码
+			if (opp.getClassCode() != null && !"".equals(opp.getClassCode())) {
+				map.put("classCode", opp.getClassCode());
+			}else {
+				map.put("classCode", "无");
+			}
 			maps.add(map);
 		}
 		return JSONArray.toJSONString(maps);

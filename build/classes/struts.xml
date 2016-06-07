@@ -32,6 +32,16 @@
 				<param name="root">result</param>
 			</result>
 		</action>
+		<action name="getShineClassChannel" class="com.shine.action.Action_GetShineClass_Channel" method="getShineClass">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<action name="markToDealChannel" class="com.shine.action.Action_MarkToDeal_Channel" method="deal">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
 	</package>
 	<package name="service" extends="json-default">
 		<action name="getUnAssignOpp" class="com.shine.action.Action_GetUnAssignOpp" method="get">

@@ -1,5 +1,8 @@
 package com.shine.dao.impl;
 
+import java.util.List;
+
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -31,6 +34,26 @@ public class ShineClassDaoImpl implements ShineClassDao {
 			session.close();
 			System.out.println("插入新班级失败：" + e.getMessage());
 			return false;
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ShineClass> selectClass() {
+		Session session = HibernateUtil.getCurrentSession();
+		Transaction transaction = session.beginTransaction();
+		try {
+			String hql = "from ShineClass";
+			Query query = session.createQuery(hql);
+			List<ShineClass> shineClasses = (List<ShineClass>)query.list();
+			transaction.commit();
+			session.close();
+			return shineClasses;
+		} catch (Exception e) {
+			transaction.rollback();
+			session.close();
+			System.out.println("查询所有班级失败：" + e.getMessage());
+			return null;
 		}
 	}
 

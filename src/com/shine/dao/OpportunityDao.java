@@ -64,5 +64,10 @@ public interface OpportunityDao {
 	 */
 	public List<Opportunity> getOppByDateAndContact(Date begin,Date end,String contact);
 	
-	
+	/**
+	 * 通过商机的id标记为已成单
+	 * @param id
+	 * @return 标记结果boolean
+	 */
+	public boolean markToDeal(int id, String classCode);
 }

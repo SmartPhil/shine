@@ -207,4 +207,29 @@ public class OpportunityDaoImpl implements OpportunityDao {
 			return null;
 		}
 	}
+
+	@Override
+	public boolean markToDeal(int id, String classCode) {
+		Session session = HibernateUtil.getCurrentSession();
+		Transaction ts = session.beginTransaction();
+		try {
+			String hql = "update Opportunity set isDeal = 1,classCode = :classCode where id = :id";
+			Query query = session.createQuery(hql);
+			query.setString("classCode", classCode);
+			query.setInteger("id", id);
+			Integer result = query.executeUpdate();
+			ts.commit();
+			session.close();
+			if (result >= 0) {
+				return true;
+			}else {
+				return false;
+			}
+		} catch (Exception e) {
+			System.out.println("通过日期与联系方式查询商机失败：" + e.getMessage());
+			ts.rollback();
+			session.close();
+			return false;
+		}
+	}
 }

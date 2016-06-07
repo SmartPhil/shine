@@ -42,6 +42,60 @@ $(document).ready(function(){
 			}
 		});
 	});
+	
+	$("#mainTable").on("click","button[name='markToDeal']",function(e){
+		$.ajax({
+			url : 'getShineClassChannel',
+			type : 'post',
+			dataType : 'json',
+			success : function(e){
+				var data = eval("(" + e + ")");
+				for (var i = 0; i < data.length; i++) {
+					$("#classCode").append("<option value=\"" + data[i].classCode + "\">" + data[i].classCode + "</option>");	
+				}
+			},
+			error : function(e){
+				alert("系统出错！请联系管理员！");
+			}
+		});
+		
+		var td = $(this).parent();
+		var tr = $(td).parent();
+		var tds = $(tr).children();
+		$("#deal_id").text($(tds[0]).text());
+		$("#deal_stuName").text($(tds[1]).text());
+		$("#deal_contactTel1").text($(tds[3]).text());
+		$("#deal_contactTel2").text($(tds[4]).text());
+		
+		$("#dealModal").modal({
+			keyboard : true
+		})
+	});
+	
+	$("#btn_submitDeal").click(function(e){
+		if (confirm("确认成单吗？")) {
+			$.ajax({
+				url : 'markToDealChannel.action',
+				type : 'post',
+				dataType : 'json',
+				data : {'id' : $("#deal_id").text(),'classCode' : $("#classCode").val()},
+				success : function(e){
+					var data = eval("(" + e + ")");
+					var result = data.result;
+					if (result == "success") {
+						alert("成功！");
+					}else {
+						alert("失败！");
+					}
+				},
+				error : function(e){
+					alert("系统出错！请联系管理员！");
+				}
+			});
+		}else {
+			return;
+		}
+	});
 });
 </script>
 </head>
@@ -135,6 +189,44 @@ $(document).ready(function(){
 			</tr>
 		</tfoot>
 	</table>
+</div>
+<!-- deal modal -->
+<div class="modal fade" id="dealModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">成单</h4>
+      </div>
+      <div class="modal-body"> 
+        <table id="dealTable" class="table table-bordered"> 
+        	<tr>
+        		<td>id</td>
+        		<td id="deal_id"></td>
+        		<td>学员姓名</td>
+        		<td id="deal_stuName"></td>
+        	</tr>
+			<tr>
+				<td>联系方式1</td>
+				<td id="deal_contactTel1"></td>
+				<td>联系方式2</td>
+				<td id="deal_contactTel2"></td>
+			</tr>
+			<tr>
+				<td>选择班级</td>
+				<td colspan="3">
+					<select id="classCode" name="classCode">
+					</select>
+				</td>
+			</tr>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" id="btn_submitDeal" class="btn btn-primary">提交</button>
+      </div>
+    </div>
+  </div>
 </div>
 </body>
 </html>

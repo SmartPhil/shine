@@ -26,6 +26,7 @@ public class Opportunity {
 	private int isAssign;					//是否已分配: 0--未分配；1--已分配
 	private String continueClass;           //续班情况
 	private String comment;                 //备注
+	private String classCode;				//班级编码
 	
 	public int getId() {
 		return id;
@@ -164,5 +165,11 @@ public class Opportunity {
 	}
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+	public String getClassCode() {
+		return classCode;
+	}
+	public void setClassCode(String classCode) {
+		this.classCode = classCode;
 	}
 }
