@@ -1,5 +1,6 @@
 package com.shine.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import com.shine.dto.Opportunity;
@@ -53,4 +54,15 @@ public interface OpportunityDao {
 	 * @return 分配结果
 	 */
 	public boolean assignOpp(int oppId, String CSName);
+	
+	/**
+	 * 通过日期与联系方式查询商机
+	 * @param begin
+	 * @param end
+	 * @param contact
+	 * @return 查询结果
+	 */
+	public List<Opportunity> getOppByDateAndContact(Date begin,Date end,String contact);
+	
+	
 }

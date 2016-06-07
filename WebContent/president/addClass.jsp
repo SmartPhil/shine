@@ -107,6 +107,10 @@ $(document).ready(function(){
     		<label for="classManager">班主任</label>
     		<input type="text" class="form-control" id="classManager" name="classManager" placeholder="请输入班主任姓名">
   		</div>
+  		<div class="form-group">
+    		<label for="fee">班主任</label>
+    		<input type="text" class="form-control" id="fee" name="fee" placeholder="请输入学费">
+  		</div>
   		<input type="button" data-loading-text="提交中……" class="btn btn-primary" id="submitAddClass" value="提交"/>
 	</form>
 </div>

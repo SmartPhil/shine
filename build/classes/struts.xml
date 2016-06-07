@@ -27,6 +27,11 @@
 				<param name="root">result</param>
 			</result>
 		</action>
+		<action name="getOppChannel" class="com.shine.action.Action_GetOpp_Channel" method="getOpp">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
 	</package>
 	<package name="service" extends="json-default">
 		<action name="getUnAssignOpp" class="com.shine.action.Action_GetUnAssignOpp" method="get">

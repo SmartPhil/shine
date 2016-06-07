@@ -25,5 +25,7 @@
 		<property name="followCS" column="sFollowCS"></property>
 		<property name="creator" column="sCreator"></property>
 		<property name="isAssign" column="nIsAssign"></property>
+		<property name="continueClass" column="continueClass"></property>
+		<property name="comment" column="comment"></property>
 	</class>
 </hibernate-mapping>

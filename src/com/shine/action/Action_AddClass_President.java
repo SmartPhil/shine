@@ -21,6 +21,7 @@ public class Action_AddClass_President extends ActionSupport {
 	private String foreignTeacher;
 	private String chinaTeacher;
 	private String classManager;
+	private String fee;
 	private String result;
 	
 	public String addClass(){
@@ -47,6 +48,9 @@ public class Action_AddClass_President extends ActionSupport {
 		shineClass.setForeignTeacher(foreignTeacher);
 		shineClass.setChinaTeacher(chinaTeacher);
 		shineClass.setClassManager(classManager);
+		if (!"".equals(fee) && fee != null) {
+			shineClass.setFee(Float.valueOf(fee));
+		}
 		ShineClassDao shineClassDao = new ShineClassDaoImpl();
 		boolean insertResult = shineClassDao.insertClass(shineClass);
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -118,5 +122,11 @@ public class Action_AddClass_President extends ActionSupport {
 	}
 	public void setResult(String result) {
 		this.result = result;
+	}
+	public String getFee() {
+		return fee;
+	}
+	public void setFee(String fee) {
+		this.fee = fee;
 	}
 }

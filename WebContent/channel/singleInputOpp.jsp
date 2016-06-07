@@ -67,6 +67,7 @@ $(document).ready(function(e){
 				<li role="presentation"><a href="#">欢迎您:<%=username %></a></li>
   				<li role="presentation" class="active"><a href="#">录入商机</a></li>
   				<li role="presentation"><a href="<%=request.getContextPath()%>/channel/importOpp.jsp">批量导入</a></li>
+  				<li role="presentation"><a href="<%=request.getContextPath()%>/channel/deal.jsp">成单</a></li>
 			</ul>
 		</div>
 		<div class="navbar-footer"></div>

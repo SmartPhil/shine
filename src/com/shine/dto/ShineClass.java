@@ -13,6 +13,7 @@ public class ShineClass {
 	private String foreignTeacher; //外教
 	private String chinaTeacher;   //中教
 	private String classManager;   //班主任
+	private float fee;             //学费
 	/**
 	 * @return the id
 	 */
@@ -132,5 +133,11 @@ public class ShineClass {
 	 */
 	public void setClassManager(String classManager) {
 		this.classManager = classManager;
+	}
+	public float getFee() {
+		return fee;
+	}
+	public void setFee(float fee) {
+		this.fee = fee;
 	}
 }

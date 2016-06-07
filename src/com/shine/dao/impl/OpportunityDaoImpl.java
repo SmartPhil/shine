@@ -1,5 +1,6 @@
 package com.shine.dao.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -162,10 +163,48 @@ public class OpportunityDaoImpl implements OpportunityDao {
 				return false;
 			}
 		} catch (Exception e) {
-			System.out.println("分配商机失败：" + e.getMessage());
+			System.out.println("分配商机失败：" + e.getMessage()); 
 			ts.rollback();
 			session.close();
 			return false;
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Opportunity> getOppByDateAndContact(Date begin, Date end, String contact) {
+		Session session = HibernateUtil.getCurrentSession();
+		Transaction ts = session.beginTransaction();
+		try {
+			String hql = "from Opportunity where 1=1";
+			if (begin != null) {
+				hql += " and createTime >=:begin";
+			}
+			if (end != null) {
+				hql += " and createTime <=:end";
+			}
+			if (!"".equals(contact) && contact != null) {
+				hql += " and (contactTel1 =:contact or contactTel2 =:contact)";
+			}
+			Query query = session.createQuery(hql);
+			if (begin != null) {
+				query.setDate("begin", begin);
+			}
+			if (end != null) {
+				query.setDate("end", end);
+			}
+			if (!"".equals(contact) && contact != null) {
+				query.setString("contact", contact);
+			}
+			List<Opportunity> opportunities = (List<Opportunity>)query.list();
+			ts.commit();
+			session.close();
+			return opportunities;
+		} catch (Exception e) {
+			System.out.println("通过日期与联系方式查询商机失败：" + e.getMessage());
+			ts.rollback();
+			session.close();
+			return null;
 		}
 	}
 }

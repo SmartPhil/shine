@@ -24,6 +24,8 @@ public class Opportunity {
 	private String followCS;				//跟进客服
 	private String creator;					//创建者
 	private int isAssign;					//是否已分配: 0--未分配；1--已分配
+	private String continueClass;           //续班情况
+	private String comment;                 //备注
 	
 	public int getId() {
 		return id;
@@ -150,5 +152,17 @@ public class Opportunity {
 	}
 	public void setIsAssign(int isAssign) {
 		this.isAssign = isAssign;
+	}
+	public String getContinueClass() {
+		return continueClass;
+	}
+	public void setContinueClass(String continueClass) {
+		this.continueClass = continueClass;
+	}
+	public String getComment() {
+		return comment;
+	}
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 }

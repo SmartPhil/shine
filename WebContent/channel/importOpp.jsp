@@ -63,6 +63,7 @@ $(document).ready(function(){
 				<li role="presentation"><a id="usernameShow" href="#">欢迎您:<%=username %></a></li>
   				<li role="presentation"><a href="<%=request.getContextPath()%>/channel/singleInputOpp.jsp">录入商机</a></li>
   				<li role="presentation" class="active"><a href="#">导入商机</a></li>
+  				<li role="presentation"><a href="<%=request.getContextPath()%>/channel/deal.jsp">成单</a></li>
 			</ul>
 		</div>
 	</div>
