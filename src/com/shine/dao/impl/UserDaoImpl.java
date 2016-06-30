@@ -32,7 +32,6 @@ public class UserDaoImpl implements UserDao {
 				return null;
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
 			System.out.println("通过用户名以及密码查询用户失败：" + e.getMessage());
 			transaction.rollback();
 			session.close();
