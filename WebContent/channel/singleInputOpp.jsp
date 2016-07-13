@@ -14,6 +14,24 @@
 <script type="text/javascript" src="<%=request.getContextPath()%>/My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript">
 $(document).ready(function(e){
+	//获取CS列表
+	$.ajax({
+		url : 'getCSUser.action',
+		type : 'post',
+		dataType : 'json',
+		success : function(e){
+			var data = eval("(" + e + ")");
+			for (var i = 0; i < data.length; i++) {
+				var id = data[i].id;
+				var name = data[i].name;
+				$("#cs").append("<option value=\"" + name + "\">" + name + "</option>");
+			}
+		},
+		error : function(e){
+			alert("系统出错！请联系管理员！");
+		}
+	});
+	
 	$("#submitSJ").click(function(){
 		var $btn = $(this).button('loading');
 		
@@ -65,7 +83,7 @@ $(document).ready(function(e){
 		<div class="collapse navbar-collapse" style="margin-left: auto;margin-right: auto;width: 70%;">
 			<ul class="nav nav-pills">
 				<li role="presentation"><a href="#">欢迎您:<%=username %></a></li>
-  				<li role="presentation" class="active"><a href="#">录入商机</a></li>
+  				<li role="presentation" class="active"><a href="#">录入新生资源</a></li>
   				<li role="presentation"><a href="<%=request.getContextPath()%>/channel/importOpp.jsp">批量导入</a></li>
   				<li role="presentation"><a href="<%=request.getContextPath()%>/channel/deal.jsp">成单</a></li>
 			</ul>
@@ -74,6 +92,7 @@ $(document).ready(function(e){
 	</div>
 </nav>
 <br/>
+<br/><br/><br/>
 <div id="body">
 <div id="showSjInput" style="width: 65%;margin-left: auto;margin-right: auto;">
 	<form id="sjForm">
@@ -89,10 +108,6 @@ $(document).ready(function(e){
     		<input type="text" class="form-control" id="englishName" name="englishName" placeholder="请输入英文姓名">
   		</div>
   		<div class="form-group">
-    		<label for="exampleInputPassword1">家长姓名</label>
-    		<input type="text" class="form-control" id="parentName" name="parentName" placeholder="请输入家长姓名">
-  		</div>
-  		<div class="form-group">
     		<label for="exampleInputFile">联系方式1<span class="badge">*</span></label>
     		<input type="text" class="form-control" id="contactTel1" name="contactTel1" placeholder="请输入手机号码/座机号码">
   		</div>
@@ -101,38 +116,23 @@ $(document).ready(function(e){
     		<input type="text" class="form-control" id="contactTel2" name="contactTel2" placeholder="请输入手机号码/座机号码">
   		</div>
   		<div class="form-group">
-    		<label for="exampleInputFile">Email</label>
-    		<input type="text" class="form-control" id="email" name="email" placeholder="请输入Email">
-  		</div>
-  		<div class="form-group">
-    		<label for="exampleInputFile">预约时间</label>
-    		<input type="text" class="form-control" id="orderTime" name="orderTime" onclick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss'})" placeholder="请选择预约时间">
-  		</div>
-  		<div class="form-group">
-  			<label for="exampleInputEmail1">性别</label>
+  			<label for="gender">性别</label>
     		<select id="gender" class="form-control" name="gender">
     			<option value="1">男</option>
     			<option value="2">女</option>
     		</select>
   		</div>
   		<div class="form-group">
-    		<label for="exampleInputPassword1">年龄</label>
-    		<input type="text" class="form-control" id="age" name="age" onkeyup="value=value.replace(/[^(\d)]/g,'')" placeholder="请输入年龄">
-  		</div>
-  		<div class="form-group">
-    		<label for="exampleInputPassword1">生日</label>
+    		<label for="birthday">生日</label>
     		<input type="text" class="form-control" id="birthday" name="birthday" onclick="WdatePicker()" placeholder="请选择生日">
   		</div>
-		<div class="form-group">
-    		<label for="exampleInputFile">学校</label>
-    		<input type="text" class="form-control" id="school" name="school" placeholder="请输入学员就读学校">
+  		<div class="form-group">
+    		<label for="cs">客服</label>
+    		<select id="cs" class="form-control" name="cs" placeholder="请选择客服人员">
+    		</select>
   		</div>
   		<div class="form-group">
-    		<label for="exampleInputFile">家庭地址</label>
-    		<input type="text" class="form-control" id="address" name="address" placeholder="请输入学员地址">
-  		</div>
-  		<div class="form-group">
-    		<label for="exampleInputFile">来源</label>
+    		<label for="source">来源</label>
     		<input type="text" class="form-control" id="source" name="source" placeholder="请输入信息来源">
   		</div>
   		<input type="hidden" value="<%=username %>" id="giveOrg" name="giveOrg"/>
@@ -140,5 +140,7 @@ $(document).ready(function(e){
 	</form>
 </div>
 </div>
+<br/>
+<br/><br/><br/>
 </body>
 </html>

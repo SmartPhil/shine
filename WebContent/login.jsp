@@ -43,7 +43,7 @@ $(document).ready(function(e){
 						//校长
 						window.location.href = "getUnAssignOppPresident.action";
 					}else if (role == '2') {
-						//教师主管
+						//教师主管 
 						window.location.href = "";
 					}else if (role == '3') {
 						//渠道（行政或市场）

@@ -15,7 +15,9 @@
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(e){
-	var table = $("#mainTable").DataTable({});
+	var table = $("#mainTable").DataTable({
+		 "scrollX": true
+	});
 	$.ajax({
 		url : 'getMyOppByCS.action',
 		type : 'post',
@@ -28,9 +30,10 @@ $(document).ready(function(e){
 							   + "<button name=\"release\" class=\"btn btn-primary\">释放</button>";
 			for (var i = 0; i < data.length; i++) {
 				var obj = [
-				           data[i].id,data[i].stuName,data[i].parentName,data[i].contactTel1,
+				           data[i].id,data[i].stuName,data[i].englishName,data[i].contactTel1,
 				           data[i].contactTel2,data[i].address,data[i].orderTime,data[i].isArrive,
-				           data[i].arriveTime,data[i].isDeal,operationRow
+				           data[i].arriveTime,data[i].isDeal,data[i].latestFollowTime,data[i].latestFollowContent,
+				           data[i].followContentCount,operationRow
 				          ];
 				table.row.add(obj).draw(false);
 			}
@@ -47,7 +50,7 @@ $(document).ready(function(e){
 		
 		$("#follow_id").text($(tds[0]).text());
 		$("#follow_stuName").text($(tds[1]).text());
-		$("#follow_parentName").text($(tds[2]).text());
+		$("#follow_englishName").text($(tds[2]).text());
 		$("#follow_contactTel1").text($(tds[3]).text());
 		$("#follow_contactTel2").text($(tds[4]).text());
 		$("#follow_address").text($(tds[5]).text());
@@ -151,7 +154,7 @@ $(document).ready(function(e){
 			<ul class="nav nav-pills">
 				<li role="presentation"><a id="nameShow" href="#">欢迎您:<%=username %></a></li>
   				<li role="presentation"><a href="<%=request.getContextPath() %>/getUnAssignOpp.action">未分配商机</a></li>
-  				<li role="presentation" class="active"><a href="#">我的商机</a></li>
+  				<li role="presentation" class="active"><a href="#">我的学员</a></li>
 			</ul>
 		</div>
 		<div class="navbar-footer"></div>
@@ -168,7 +171,7 @@ $(document).ready(function(e){
 			<tr>
 				<th>ID</th>
 				<th>学员姓名</th>
-				<th>家长姓名</th>
+				<th>英文名</th>
 				<th>联系方式1</th>
 				<th>联系方式2</th>
 				<th>家庭地址</th>
@@ -176,6 +179,9 @@ $(document).ready(function(e){
 				<th>是否到店</th>
 				<th>到店时间</th>
 				<th>是否成单</th>
+				<th>上次跟进时间</th>
+				<th>上次跟进内容</th>
+				<th>总跟进内容</th>
 				<th>操作</th>
 			</tr>
 		</thead>
@@ -185,7 +191,7 @@ $(document).ready(function(e){
 			<tr>
 				<th>ID</th>
 				<th>学员姓名</th>
-				<th>家长姓名</th>
+				<th>英文名</th>
 				<th>联系方式1</th>
 				<th>联系方式2</th>
 				<th>家庭地址</th>
@@ -193,6 +199,9 @@ $(document).ready(function(e){
 				<th>是否到店</th>
 				<th>到店时间</th>
 				<th>是否成单</th>
+				<th>上次跟进时间</th>
+				<th>上次跟进内容</th>
+				<th>总跟进内容</th>
 				<th>操作</th>
 			</tr>
 		</tfoot>
@@ -232,8 +241,8 @@ $(document).ready(function(e){
 				<td id="follow_contactTel2"></td>
 			</tr>
 			<tr>
-				<td>家长姓名</td>
-				<td id="follow_parentName"></td>
+				<td>英文名</td>
+				<td id="follow_englishName"></td>
 				<td>家庭地址</td>
 				<td id="follow_address"></td>
 			</tr>

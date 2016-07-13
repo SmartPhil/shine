@@ -46,4 +46,52 @@ public class FollowContentDaoImpl implements FollowContentDao {
 			return null;
 		}
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public FollowContent getLatestFollowContentByOppId(int id) {
+		Session session = HibernateUtil.getCurrentSession();
+		Transaction ts = session.beginTransaction();
+		try {
+			String hql = "from FollowContent where oppId = ? order by time DESC";
+			Query query = session.createQuery(hql);
+			query.setInteger(0, Integer.valueOf(id));
+			query.setFirstResult(0);
+			query.setMaxResults(1);
+			List<FollowContent> followContents = (List<FollowContent>)query.list();
+			ts.commit();
+			session.close();
+			if (followContents.size() > 0) {
+				return followContents.get(0);
+			}else {
+				return null;
+			}
+		} catch (Exception e) {
+			System.out.println("查询商机最近跟进记录失败：" + e.getMessage());
+			ts.rollback();
+			session.close();
+			return null;
+		}
+	}
+
+	@Override
+	public Integer getFollowContentCountByOppId(int id, String csName) {
+		Session session = HibernateUtil.getCurrentSession();
+		Transaction ts = session.beginTransaction();
+		try {
+			String hql = "select count(*) from FollowContent where oppId = ? and follower = ?";
+			Query query = session.createQuery(hql);
+			query.setInteger(0, Integer.valueOf(id));
+			query.setString(1, csName);
+			int result = ((Number)query.uniqueResult()).intValue();
+			ts.commit();
+			session.close();
+			return result;
+		} catch (Exception e) {
+			System.out.println("查询某个客服某条商机的总跟进记录数失败：" + e.getMessage());
+			ts.rollback();
+			session.close();
+			return 0;
+		}
+	}
 }

@@ -20,7 +20,7 @@
 $(document).ready(function(){
 	var table = $("#mainTable").DataTable({});
 	
-	$("#mainTable").on("click","button[name=recive]",function(){
+	/* $("#mainTable").on("click","button[name=recive]",function(){
 		var $btn = $(this).button("loading");
 		var td = $(this).parent();
 		var tr = $(td).parent();
@@ -50,7 +50,7 @@ $(document).ready(function(){
 				$btn.button("reset");
 			}
 		})
-	})
+	}) */
 });
 </script>
 </head>
@@ -69,7 +69,7 @@ $(document).ready(function(){
 		<div class="collapse navbar-collapse" style="margin-left: auto;margin-right: auto;width: 70%;">
 			<ul class="nav nav-pills">
 				<li role="presentation"><a id="nameShow" href="#">欢迎您:<%=username %></a></li>
-  				<li role="presentation" class="active"><a href="#">未分配商机</a></li>
+  				<li role="presentation" class="active"><a href="#">未分配新生</a></li>
   				<li role="presentation"><a href="<%=request.getContextPath() %>/service/myopp.jsp">我的商机</a></li>
 			</ul>
 		</div>
@@ -87,7 +87,7 @@ $(document).ready(function(){
 			<tr>
 				<th>ID</th>
 				<th>学员姓名</th>
-				<th>家长姓名</th>
+				<th>英文名</th>
 				<th>联系方式1</th>
 				<th>联系方式2</th>
 				<th>家庭地址</th>
@@ -95,7 +95,6 @@ $(document).ready(function(){
 				<th>是否到店</th>
 				<th>到店时间</th>
 				<th>是否成单</th>
-				<th>操作</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -107,10 +106,14 @@ $(document).ready(function(){
 			<tr>
 				<td><%=oppList.get(i).getId() %></td>
 				<td><%=oppList.get(i).getName() %></td>
-				<td><%=oppList.get(i).getParentName() %></td>
+				<td><%=oppList.get(i).getEnglishName() %></td>
 				<td><%=oppList.get(i).getContactTel1() %></td>
 				<td><%=oppList.get(i).getContactTel2() %></td>
-				<td><%=oppList.get(i).getAddress() %></td>
+				<%if(oppList.get(i).getAddress() == null || "".equals(oppList.get(i).getAddress())){ %>
+					<td>无</td>
+				<%} else {%>
+					<td><%=oppList.get(i).getAddress() %></td>
+				<%} %>
 				<%if(oppList.get(i).getOrderTime() != null){ %>
 					<td><%=sdf.format(oppList.get(i).getOrderTime()) %></td>
 				<%} else{%>
@@ -131,9 +134,6 @@ $(document).ready(function(){
 				<%} else if(oppList.get(i).getIsDeal() == 1){%>
 					<td>已成单</td>
 				<%} %>
-				<td>
-					<button class="btn btn-primary" id="" name="recive" data-loading-text="接收中">接收</button>
-				</td>
 			</tr>
 		<%} %>
 		</tbody>
@@ -141,7 +141,7 @@ $(document).ready(function(){
 			<tr>
 				<th>ID</th>
 				<th>学员姓名</th>
-				<th>家长姓名</th>
+				<th>英文名</th>
 				<th>联系方式1</th>
 				<th>联系方式2</th>
 				<th>家庭地址</th>
@@ -149,7 +149,6 @@ $(document).ready(function(){
 				<th>是否到店</th>
 				<th>到店时间</th>
 				<th>是否成单</th>
-				<th>操作</th>
 			</tr>
 		</tfoot>
 	</table>

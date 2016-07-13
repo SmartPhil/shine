@@ -18,4 +18,18 @@ public interface FollowContentDao {
 	 * @return List<FollowContent>
 	 */
 	public List<FollowContent> getFollowContentById(int id);
+	
+	/**
+	 * 查询某条商机的最近一次跟进记录
+	 * @param id
+	 * @return FollowContent
+	 */
+	public FollowContent getLatestFollowContentByOppId(int id);
+	
+	/**
+	 * 查询某个客服所负责的某条商机的总跟进记录次数
+	 * @param id
+	 * @return integer 总跟进次数
+	 */
+	public Integer getFollowContentCountByOppId(int id, String csName);
 }
