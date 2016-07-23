@@ -100,19 +100,19 @@ $(document).ready(function(e){
   			<p class="bg-primary">注意：带*号为必填项</p>	
   		</div>
   		<div class="form-group">
-  			<label for="exampleInputEmail1">学员姓名</label>
+  			<label for="name">学员姓名</label>
     		<input type="text" class="form-control" id="name" name="name" placeholder="请输入学员姓名">
   		</div>
   		<div class="form-group">
-  			<label for="exampleInputEmail1">英文姓名</label>
+  			<label for="englishName">英文姓名</label>
     		<input type="text" class="form-control" id="englishName" name="englishName" placeholder="请输入英文姓名">
   		</div>
   		<div class="form-group">
-    		<label for="exampleInputFile">联系方式1<span class="badge">*</span></label>
+    		<label for="contactTel1">联系方式1<span class="badge">*</span></label>
     		<input type="text" class="form-control" id="contactTel1" name="contactTel1" placeholder="请输入手机号码/座机号码">
   		</div>
   		<div class="form-group">
-    		<label for="exampleInputFile">联系方式2</label>
+    		<label for="contactTel2">联系方式2</label>
     		<input type="text" class="form-control" id="contactTel2" name="contactTel2" placeholder="请输入手机号码/座机号码">
   		</div>
   		<div class="form-group">

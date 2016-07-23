@@ -71,6 +71,45 @@ $(document).ready(function(e){
 			}
 		})
 	});
+	
+	$("#nameShow").click(function(){
+		$("#modifyPswModal").modal({
+			keyboard : true
+		});
+	});
+	
+	$("#modifyPswButton").click(function(){
+		var newPassword = $("#newPassword").val();
+		var confirmPassword = $("#confirmPassword").val();
+		if (newPassword != confirmPassword) {
+			alert("新密码两次输入不一致，请重新输入！");
+			return;
+		}
+		
+		$.ajax({
+			url : 'modifyUserPsw',
+			type : 'post',
+			data : {'username' : $("#nameShow").text().split(":")[1],'usedPassword' : $("#usedPassword").val(),
+				'newPassword' : $("#newPassword").val()},
+			dataType : 'json',
+			success : function(e){
+				var data = eval("(" + e + ")");
+				var result = data.result;
+				if (result == "systemError") {
+					alert("未查到当前用户！请稍后再试！");
+				}else if (result == "usedPasswordError"){
+					alert("原密码错误,请确认后再试！");
+				}else if (result == "modifyError"){
+					alert("修改密码出错，请稍后再试！");
+				}else if (result == "success"){
+					alert("修改成功！");
+				}
+			},
+			error : function(e){
+				alert("系统出错！请联系管理员！");
+			}
+		});
+	});
 });
 </script>
 
@@ -95,7 +134,6 @@ $(document).ready(function(e){
   				<li role="presentation"><a href="<%=request.getContextPath() %>/president/addClass.jsp">添加班级</a></li>
 			</ul>
 		</div>
-		<div class="navbar-footer"></div>
 	</div>
 </nav>
 <br/>
@@ -215,6 +253,38 @@ $(document).ready(function(e){
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
         <button type="button" id="btn_submitAssign" class="btn btn-primary">提交</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 修改密码 -->
+<div class="modal fade" id="modifyPswModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">修改密码</h4>
+      </div>
+      <div class="modal-body"> 
+      	<form id="modifyPswForm">
+  			<div class="form-group">
+    			<label for="usedPassword">原密码</label>
+      			<input type="text" class="form-control" id="usedPassword" name="usedPassword" placeholder="原始密码">
+  			</div>
+  			<div class="form-group">
+  				<label class="newPassword">新密码</label>
+  				<input type="text" class="form-control" id="newPassword" name="newPassword" placeholder="新密码">
+  			</div>
+  			<div class="form-group">
+  				<label for="confirmPassword">确认密码</label>
+  				<input type="text" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="确认密码">
+  			</div>
+		</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" id="modifyPswButton" class="btn btn-primary">确认修改</button>
       </div>
     </div>
   </div>
