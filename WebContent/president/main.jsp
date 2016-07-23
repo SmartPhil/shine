@@ -72,6 +72,7 @@ $(document).ready(function(e){
 		})
 	});
 	
+	
 	$("#nameShow").click(function(){
 		$("#modifyPswModal").modal({
 			keyboard : true
