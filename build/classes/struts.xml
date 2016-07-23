@@ -118,4 +118,11 @@
 			</result>
 		</action>
 	</package>
+	<package name="teacher" extends="json-default">
+		<action name="getClassByTeacher" class="com.shine.action.Action_GetClassOfTeacher_Teacher" method="getClassOfTheacher">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+	</package>
 </struts>

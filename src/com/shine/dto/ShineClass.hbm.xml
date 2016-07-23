@@ -14,6 +14,7 @@
 		<property name="foreignTeacher" column="foreignTeacher"></property>
 		<property name="chinaTeacher" column="chinaTeacher"></property>
 		<property name="classManager" column="classManager"></property>
+		<property name="currentNum" column="currentNum"></property>
 		<property name="fee" column="fee"></property>
 	</class>
 </hibernate-mapping>

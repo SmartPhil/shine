@@ -57,4 +57,26 @@ public class ShineClassDaoImpl implements ShineClassDao {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ShineClass> getClassByTeacher(String teacherName) {
+		Session session = HibernateUtil.getCurrentSession();
+		Transaction transaction = session.beginTransaction();
+		try {
+			String hql = "from ShineClass where foreignTeacher = ? or chinaTeacher = ?";
+			Query query = session.createQuery(hql);
+			query.setString(0, teacherName);
+			query.setString(1, teacherName);
+			List<ShineClass> shineClasses = (List<ShineClass>)query.list();
+			transaction.commit();
+			session.close();
+			return shineClasses;
+		} catch (Exception e) {
+			transaction.rollback();
+			session.close();
+			System.out.println("按照教师姓名查询班级失败：" + e.getMessage());
+			return null;
+		}
+	}
+
 }

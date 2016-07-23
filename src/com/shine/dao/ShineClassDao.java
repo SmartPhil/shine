@@ -17,4 +17,11 @@ public interface ShineClassDao {
 	 * @return List<ShineClass>
 	 */
 	public List<ShineClass> selectClass();
+	
+	/**
+	 * 通过教师用户名查询班级
+	 * @param teacherName
+	 * @return List<ShineClass> 班级信息列表
+	 */
+	public List<ShineClass> getClassByTeacher(String teacherName);
 }
