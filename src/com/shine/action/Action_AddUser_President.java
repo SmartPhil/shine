@@ -12,7 +12,6 @@ import com.shine.dto.User;
 @SuppressWarnings("serial")
 public class Action_AddUser_President extends ActionSupport {
 	private String username;
-	private String password;
 	private String role;
 	private String result;
 	public String addUser(){
@@ -25,7 +24,7 @@ public class Action_AddUser_President extends ActionSupport {
 		}
 		User user = new User();
 		user.setUsername(username);
-		user.setPassword(password);
+		user.setPassword("123456");
 		user.setRole(Integer.valueOf(role));
 		boolean insertResult = userDao.insertUser(user);
 		if (insertResult) {
@@ -42,12 +41,6 @@ public class Action_AddUser_President extends ActionSupport {
 	}
 	public void setUsername(String username) {
 		this.username = username;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
 	}
 	public String getRole() {
 		return role;

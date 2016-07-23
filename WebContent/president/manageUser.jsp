@@ -275,16 +275,16 @@ $(document).ready(function(e){
     			<label for="username">用户名</label>
     			<input type="text" class="form-control" id="add_username" name="username" placeholder="用户名">
   			</div>
-  			<div class="form-group">
+  			<!-- <div class="form-group">
     			<label for="password">密码</label>
     			<input type="password" class="form-control" id="add_password" name="password" placeholder="密码">
   			</div>
   			<div class="form-group">
     			<label for="password">确认密码</label>
     			<input type="password" class="form-control" id="add_confirmpassword" name="confirmpassword" placeholder="确认密码">
-  			</div>
+  			</div> -->
   			<div class="form-group">
-    			<label for="exampleInputPassword1">角色</label>
+    			<label for="add_role">角色</label>
     			<select class="form-control" id="add_role" name="role">
   					<option value="2">教师主管</option>
   					<option value="3">行政人员</option>

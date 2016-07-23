@@ -30,7 +30,6 @@ public class Action_AddOpp extends ActionSupport {
 			nGender = Integer.parseInt(gender);
 		}
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
 		Date dtBirthday = new Date();
 		if(!"".equals(birthday)) {
