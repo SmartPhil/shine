@@ -242,7 +242,6 @@ $(document).ready(function(e){
 				<li role="presentation"><a id="nameShow" href="#">欢迎您:<%=username %></a></li>
   				<li role="presentation"><a href="getUnAssignOppPresident.action">未分配商机</a></li>
   				<li role="presentation" class="active"><a href="#">管理系统用户</a></li>
-  				<li role="presentation"><a href="<%=request.getContextPath() %>/president/addClass.jsp">添加班级</a></li>
 			</ul>
 		</div>
 		<div class="navbar-footer"></div>

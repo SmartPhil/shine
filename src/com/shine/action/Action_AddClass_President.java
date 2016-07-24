@@ -10,6 +10,12 @@ import com.shine.dao.ShineClassDao;
 import com.shine.dao.impl.ShineClassDaoImpl;
 import com.shine.dto.ShineClass;
 
+/**
+ * 作废action
+ * @author Administrator
+ *
+ */
+@Deprecated
 @SuppressWarnings("serial")
 public class Action_AddClass_President extends ActionSupport {
 	private String level;
