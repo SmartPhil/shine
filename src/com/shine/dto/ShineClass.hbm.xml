@@ -16,5 +16,6 @@
 		<property name="classManager" column="classManager"></property>
 		<property name="currentNum" column="currentNum"></property>
 		<property name="fee" column="fee"></property>
+		<property name="state" column="state"></property>
 	</class>
 </hibernate-mapping>

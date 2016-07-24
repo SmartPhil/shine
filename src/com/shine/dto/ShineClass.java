@@ -15,6 +15,7 @@ public class ShineClass {
 	private String classManager;   //班主任
 	private int currentNum;     //当前人数
 	private float fee;             //学费
+	private int state;          //当前班级状态；0--待审批；1--审批通过；
 	/**
 	 * @return the id
 	 */
@@ -146,5 +147,11 @@ public class ShineClass {
 	}
 	public void setFee(float fee) {
 		this.fee = fee;
+	}
+	public int getState() {
+		return state;
+	}
+	public void setState(int state) {
+		this.state = state;
 	}
 }

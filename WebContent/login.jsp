@@ -44,7 +44,7 @@ $(document).ready(function(e){
 						window.location.href = "getUnAssignOppPresident.action";
 					}else if (role == '2') {
 						//教师主管 
-						window.location.href = "";
+						window.location.href = "manager/addClass.jsp";
 					}else if (role == '3') {
 						//渠道（行政或市场）
 						window.location.href = "channel/singleInputOpp.jsp";

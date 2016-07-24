@@ -119,14 +119,16 @@
 				<param name="root">result</param>
 			</result>
 		</action>
-		<action name="addClass" class="com.shine.action.Action_AddClass_President" method="addClass">
+	</package>
+	<package name="teacher" extends="json-default">
+		<action name="getClassByTeacher" class="com.shine.action.Action_GetClassOfTeacher_Teacher" method="getClassOfTheacher">
 			<result name="success" type="json">
 				<param name="root">result</param>
 			</result>
 		</action>
 	</package>
-	<package name="teacher" extends="json-default">
-		<action name="getClassByTeacher" class="com.shine.action.Action_GetClassOfTeacher_Teacher" method="getClassOfTheacher">
+	<package name="manager" extends="json-default">
+		<action name="addClass" class="com.shine.action.Action_AddClassApplication_Manager" method="addClass">
 			<result name="success" type="json">
 				<param name="root">result</param>
 			</result>
