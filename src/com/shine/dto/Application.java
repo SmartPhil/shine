@@ -7,7 +7,7 @@ public class Application {
 	private String classCode; //班级编码
 	private Date applyTime;   //申请时间
 	private String applicant; //申请人
-	private int state;        //申请状态
+	private int state;        //申请状态;0--待审批；1--审批通过；-1--审批未通过
 	
 	public int getId() {
 		return id;

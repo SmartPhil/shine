@@ -133,5 +133,10 @@
 				<param name="root">result</param>
 			</result>
 		</action>
+		<action name="searchApplication" class="com.shine.action.Action_SearchApplication_Manager" method="search">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
 	</package>
 </struts>

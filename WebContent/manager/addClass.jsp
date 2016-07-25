@@ -60,7 +60,8 @@ $(document).ready(function(){
 		<div class="collapse navbar-collapse" style="margin-left: auto;margin-right: auto;width: 70%;">
 			<ul class="nav nav-pills">
 				<li role="presentation"><a id="nameShow" href="#">欢迎您:<%=username %></a></li>
-  				<li role="presentation" class="active"><a href="#">添加班级</a></li>
+  				<li role="presentation" class="active"><a href="#">申请添加班级</a></li>
+  				<li role="presentation"><a href="<%=request.getContextPath()%>/manager/viewApplication.jsp">查看申请进度</a></li>
 			</ul>
 		</div>
 		<div class="navbar-footer"></div>
