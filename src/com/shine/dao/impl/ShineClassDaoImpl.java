@@ -79,4 +79,41 @@ public class ShineClassDaoImpl implements ShineClassDao {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ShineClass> getClassByClassCode(String classCode) {
+		Session session = HibernateUtil.getCurrentSession();
+		Transaction transaction = session.beginTransaction();
+		try {
+			String hql = "from ShineClass where classCode = ?";
+			Query query = session.createQuery(hql);
+			query.setString(0, classCode);
+			List<ShineClass> shineClasses = (List<ShineClass>)query.list();
+			transaction.commit();
+			session.close();
+			return shineClasses;
+		} catch (Exception e) {
+			transaction.rollback();
+			session.close();
+			System.out.println("按照班级编码查询班级失败：" + e.getMessage());
+			return null;
+		}
+	}
+
+	@Override
+	public boolean update(ShineClass shineClass) {
+		Session session = HibernateUtil.getCurrentSession();
+		Transaction transaction = session.beginTransaction();
+		try {
+			session.update(shineClass);
+			transaction.commit();
+			session.close();
+			return true;
+		} catch (Exception e) {
+			System.out.println("更新班级信息失败：" + e.getMessage());
+			transaction.rollback();
+			session.close();
+			return false;
+		}
+	}
 }

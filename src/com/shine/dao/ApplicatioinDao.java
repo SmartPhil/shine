@@ -21,4 +21,26 @@ public interface ApplicatioinDao {
 	 * @return List<Application>
 	 */
 	public List<Application> getApplicationByDateAndApplicant(Date begin, Date end, String username);
+	
+	/**
+	 * 通过申请的日期查询申请记录
+	 * @param begin
+	 * @param end
+	 * @return
+	 */
+	public List<Application> getApplicationByDate(Date begin, Date end);
+	
+	/**
+	 * 通过id查询申请记录
+	 * @param id
+	 * @return List<Application>
+	 */
+	public List<Application> getApplicationById(int id);
+	
+	/**
+	 * 更新申请记录
+	 * @param application
+	 * @return boolean 更新结果
+	 */
+	public boolean updateApplication(Application application);
 }

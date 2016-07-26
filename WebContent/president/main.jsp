@@ -132,6 +132,7 @@ $(document).ready(function(e){
 				<li role="presentation"><a id="nameShow" href="#">欢迎您:<%=username %></a></li>
   				<li role="presentation" class="active"><a href="#">未分配商机</a></li>
   				<li role="presentation"><a href="<%=request.getContextPath() %>/president/manageUser.jsp">管理系统用户</a></li>
+  				<li role="presentation"><a href="<%=request.getContextPath() %>/president/viewApplication.jsp">增班申请</a></li>
 			</ul>
 		</div>
 	</div>

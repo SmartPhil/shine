@@ -24,4 +24,18 @@ public interface ShineClassDao {
 	 * @return List<ShineClass> 班级信息列表
 	 */
 	public List<ShineClass> getClassByTeacher(String teacherName);
+	
+	/**
+	 * 通过班级编码查询
+	 * @param classCode
+	 * @return List<ShineClass>
+	 */
+	public List<ShineClass> getClassByClassCode(String classCode);
+	
+	/**
+	 * 更新班级信息
+	 * @param shineClass
+	 * @return boolean 更新结果
+	 */
+	public boolean update(ShineClass shineClass);
 }

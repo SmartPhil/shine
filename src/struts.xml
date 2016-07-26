@@ -119,6 +119,16 @@
 				<param name="root">result</param>
 			</result>
 		</action>
+		<action name="viewApplication" class="com.shine.action.Action_ViewApplication_President" method="viewApplication">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<action name="approveApplication" class="com.shine.action.Action_ApproveApplicatoin_President" method="approve">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
 	</package>
 	<package name="teacher" extends="json-default">
 		<action name="getClassByTeacher" class="com.shine.action.Action_GetClassOfTeacher_Teacher" method="getClassOfTheacher">

@@ -61,4 +61,74 @@ public class ApplicationDaoImpl implements ApplicatioinDao {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Application> getApplicationByDate(Date begin, Date end) {
+		Session session = HibernateUtil.getCurrentSession();
+		Transaction transaction = session.beginTransaction();
+		try {
+			String hql = "from Application where 1 = 1";
+			if (begin != null) {
+				hql += " and applyTime >= :begin";
+			}
+			if (end != null) {
+				hql += " and applyTime <= :end";
+			}
+			Query query = session.createQuery(hql);
+			if (begin != null) {
+				query.setDate("begin", begin);
+			}
+			if (end != null) {
+				query.setDate("end", end);
+			}
+			List<Application> applications = (ArrayList<Application>) query.list();
+			transaction.commit();
+			session.close();
+			return applications;
+		} catch (Exception e) {
+			System.out.println("按照申请日期查询申请记录失败：" + e.getMessage());
+			transaction.rollback();
+			session.close();
+			return null;
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Application> getApplicationById(int id) {
+		Session session = HibernateUtil.getCurrentSession();
+		Transaction transaction = session.beginTransaction();
+		try {
+			String hql = "from Application where id = ?";
+			Query query = session.createQuery(hql);
+			query.setInteger(0, id);
+			List<Application> applications = (ArrayList<Application>) query.list();
+			transaction.commit();
+			session.close();
+			return applications;
+		} catch (Exception e) {
+			System.out.println("按照id查询申请记录失败：" + e.getMessage());
+			transaction.rollback();
+			session.close();
+			return null;
+		}
+	}
+
+	@Override
+	public boolean updateApplication(Application application) {
+		Session session = HibernateUtil.getCurrentSession();
+		Transaction transaction = session.beginTransaction();
+		try {
+			session.update(application);
+			transaction.commit();
+			session.close();
+			return true;
+		} catch (Exception e) {
+			System.out.println("更新申请记录失败：" + e.getMessage());
+			transaction.rollback();
+			session.close();
+			return false;
+		}
+	}
+
 }
