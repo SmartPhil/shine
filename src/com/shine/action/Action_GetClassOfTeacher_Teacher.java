@@ -17,6 +17,7 @@ public class Action_GetClassOfTeacher_Teacher extends ActionSupport {
 	private String result;
 	
 	public String getClassOfTheacher(){
+		/** 查询班级详情  **/
 		ShineClassDao shineClassDao = new ShineClassDaoImpl();
 		List<ShineClass> shineClasses = shineClassDao.getClassByTeacher(username);
 		List<HashMap<String, Object>> maps = new ArrayList<HashMap<String, Object>>();
@@ -38,6 +39,7 @@ public class Action_GetClassOfTeacher_Teacher extends ActionSupport {
 			maps.add(map);
 		}
 		result = JSONArray.toJSONString(maps);
+		
 		return SUCCESS;
 	}
 

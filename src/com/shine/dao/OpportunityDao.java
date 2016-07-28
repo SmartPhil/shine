@@ -70,4 +70,11 @@ public interface OpportunityDao {
 	 * @return 标记结果boolean
 	 */
 	public boolean markToDeal(int id, String classCode);
+	
+	/**
+	 * 通过班级编码查询学员
+	 * @param classCode
+	 * @return List<Opportunity>
+	 */
+	public List<Opportunity> getOppByClassCode(String classCode);
 }

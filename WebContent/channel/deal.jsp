@@ -44,11 +44,22 @@ $(document).ready(function(){
 	});
 	
 	$("#mainTable").on("click","button[name='markToDeal']",function(e){
+		/** 首先判断此商机是否已成单 **/
+		var td = $(this).parent();
+		var tr = $(td).parent();
+		var tds = $(tr).children();
+		var isDeal = $(tds[9]).text();
+		if (isDeal == "是") {
+			alert("已成单！请勿重复操作！");
+			return;
+		}
+		
 		$.ajax({
 			url : 'getShineClassChannel',
 			type : 'post',
 			dataType : 'json',
 			success : function(e){
+				$("#classCode").html("");
 				var data = eval("(" + e + ")");
 				for (var i = 0; i < data.length; i++) {
 					$("#classCode").append("<option value=\"" + data[i].classCode + "\">" + data[i].classCode + "</option>");	

@@ -15,7 +15,7 @@ public class ShineClass {
 	private String classManager;   //班主任
 	private int currentNum;     //当前人数
 	private float fee;             //学费
-	private int state;          //当前班级状态；0--待审批；1--审批通过；
+	private int state;          //当前班级状态；0--待审批；1--审批通过;-1--审批未通过；
 	/**
 	 * @return the id
 	 */

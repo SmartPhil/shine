@@ -27,11 +27,6 @@ $(document).ready(function(){
 		success : function(e){
 			var data = eval("(" + e + ")");
 			for (var i = 0; i < data.length; i++) {
-				/* var obj = [data[i].id,data[i].level,data[i].classCode,data[i].beginDate,
-				           data[i].endDate,data[i].beginWeek,data[i].beginTime,data[i].foreignTeacher,
-				           data[i].chinaTeacher,data[i].classManager,data[i].currentNum,
-				           data[i].fee];
-				tab.row.add(obj).draw(false); */
 				/** 添加班级编码 **/
 				$("#classCode").append("<option value=\"" + data[i].classCode + "\">" + data[i].classCode + "</option>")
 			}
@@ -43,17 +38,49 @@ $(document).ready(function(){
 	
 	$("#searchButton").click(function(){
 		$.ajax({
-			url : 'getClassByTeacher.action',
+			url : 'getClassInfo.action',
 			type : 'post',
 			dataType : 'json',
-			data : {'username' : $("#nameShow").text().split(':')[1]},
+			data : {'classCode' : $("#classCode").val()},
 			success : function(e){
 				var data = eval("(" + e + ")");
-				for (var i = 0; i < data.length; i++) {
-					var obj = [data[i].id,data[i].level,data[i].classCode,data[i].beginDate,
-					           data[i].endDate,data[i].beginWeek,data[i].beginTime,data[i].foreignTeacher,
-					           data[i].chinaTeacher,data[i].classManager,data[i].currentNum,
-					           data[i].fee];
+				var classInfo = data.classInfoJsonString;
+				var studentInfo = data.studentInfoJsonString;
+				var classInfoJson = eval("(" + classInfo + ")");
+				var studentInfoJson = eval("(" + studentInfo + ")");
+				/** 清空班级详情里面的数据 **/
+				$("#classInfoTable tbody").html("");
+				/** 展现班级详情 **/
+				for (var i = 0; i < classInfoJson.length; i++) {
+					$("#classInfoTable tbody").append("<tr>");
+					$("#classInfoTable tbody").append("<td>" + classInfoJson[i].id + "</td>");
+					$("#classInfoTable tbody").append("<td>" + classInfoJson[i].level + "</td>");
+					$("#classInfoTable tbody").append("<td>" + classInfoJson[i].classCode + "</td>");
+					$("#classInfoTable tbody").append("<td>" + classInfoJson[i].beginDate + "</td>");
+					$("#classInfoTable tbody").append("<td>" + classInfoJson[i].endDate + "</td>");
+					$("#classInfoTable tbody").append("<td>" + classInfoJson[i].beginWeek + "</td>");
+					$("#classInfoTable tbody").append("<td>" + classInfoJson[i].beginTime + "</td>");
+					$("#classInfoTable tbody").append("<td>" + classInfoJson[i].foreignTeacher + "</td>");
+					$("#classInfoTable tbody").append("<td>" + classInfoJson[i].chinaTeacher + "</td>");
+					$("#classInfoTable tbody").append("<td>" + classInfoJson[i].classManager + "</td>");
+					$("#classInfoTable tbody").append("<td>" + classInfoJson[i].currentNum + "</td>");
+					$("#classInfoTable tbody").append("<td>" + classInfoJson[i].fee + "</td>");
+					$("#classInfoTable tbody").append("</tr>")
+				}
+				
+				/** 展现学员信息详情  **/
+				tab.clear().draw(false);
+				for (var j = 0; j < studentInfoJson.length; j++) {
+					var obj = [	
+					           	studentInfoJson[j].id,
+					           	studentInfoJson[j].name,
+					           	studentInfoJson[j].englishName,
+					           	studentInfoJson[j].parentName,
+					           	studentInfoJson[j].contactTel1,
+					           	studentInfoJson[j].contactTel2,
+					           	studentInfoJson[j].address,
+					           	studentInfoJson[j].school,
+			           		];
 					tab.row.add(obj).draw(false);
 				}
 			},
@@ -146,10 +173,10 @@ $(document).ready(function(){
 	</form>
 </div>
 
-<!-- 数据展示DIV -->
-<div id="dataShowDiv" class="panel panel-primary" style="width: 80%;margin-left: auto;margin-right: auto;white-space:nowrap;">
-	<div class="panel-heading">我的班级</div>
-	<table style="width: 100%" aria-describedby="example_info" class="table table-striped table-bordered dataTable" id="mainTable">
+<!-- 班级详情DIV -->
+<div id="classInfoDiv" class="panel panel-primary" style="width: 80%;margin-left: auto;margin-right: auto;white-space:nowrap;">
+	<div class="panel-heading">班级详情</div>
+	<table style="width: 100%;text-align: center;" aria-describedby="example_info" class="table table-bordered" id="classInfoTable">
 		<thead>
 			<tr>
 				<th>ID</th>
@@ -182,6 +209,39 @@ $(document).ready(function(){
 				<th>班主任</th>
 				<th>当前人数</th>
 				<th>班级学费</th>
+			</tr>
+		</tfoot>
+	</table>
+</div>
+
+<!-- 学员详情DIV -->
+<div id="dataShowDiv" class="panel panel-primary" style="width: 80%;margin-left: auto;margin-right: auto;white-space:nowrap;">
+	<div class="panel-heading">班级学员</div>
+	<table style="width: 100%" aria-describedby="example_info" class="table table-striped table-bordered dataTable" id="mainTable">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>中文姓名</th>
+				<th>英文姓名</th>
+				<th>父母姓名</th>
+				<th>联系方式1</th>
+				<th>联系方式2</th>
+				<th>家庭住址</th>
+				<th>就读学校</th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+		<tfoot>
+			<tr>
+				<th>ID</th>
+				<th>中文姓名</th>
+				<th>英文姓名</th>
+				<th>父母姓名</th>
+				<th>联系方式1</th>
+				<th>联系方式2</th>
+				<th>家庭住址</th>
+				<th>就读学校</th>
 			</tr>
 		</tfoot>
 	</table>

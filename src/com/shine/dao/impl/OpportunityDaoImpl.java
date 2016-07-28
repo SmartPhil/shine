@@ -1,5 +1,6 @@
 package com.shine.dao.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -230,6 +231,27 @@ public class OpportunityDaoImpl implements OpportunityDao {
 			ts.rollback();
 			session.close();
 			return false;
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Opportunity> getOppByClassCode(String classCode) {
+		Session session = HibernateUtil.getCurrentSession();
+		Transaction ts = session.beginTransaction();
+		try {
+			String hql = "from Opportunity where classCode = ?";
+			Query query = session.createQuery(hql);
+			query.setString(0, classCode);
+			List<Opportunity> opportunities = (ArrayList<Opportunity>)query.list();
+			ts.commit();
+			session.close();
+			return opportunities;
+		} catch (Exception e) {
+			System.out.println("通过班级编码查询商机失败：" + e.getMessage());
+			ts.rollback();
+			session.close();
+			return null;
 		}
 	}
 }

@@ -43,7 +43,7 @@ public class ShineClassDaoImpl implements ShineClassDao {
 		Session session = HibernateUtil.getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		try {
-			String hql = "from ShineClass";
+			String hql = "from ShineClass where state = 1";
 			Query query = session.createQuery(hql);
 			List<ShineClass> shineClasses = (List<ShineClass>)query.list();
 			transaction.commit();

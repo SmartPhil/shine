@@ -5,7 +5,10 @@ import java.util.HashMap;
 import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
 import com.shine.dao.OpportunityDao;
+import com.shine.dao.ShineClassDao;
 import com.shine.dao.impl.OpportunityDaoImpl;
+import com.shine.dao.impl.ShineClassDaoImpl;
+import com.shine.dto.ShineClass;
 
 @SuppressWarnings("serial")
 public class Action_MarkToDeal_Channel extends ActionSupport {
@@ -14,18 +17,27 @@ public class Action_MarkToDeal_Channel extends ActionSupport {
 	private String result;
 	
 	public String deal() {
+		/**  将当前学生标记为已成单   **/
 		OpportunityDao opportunityDao = new OpportunityDaoImpl();
-		boolean markResult = false;
-		if (id != null && !"".equals(id)) {
-			markResult = opportunityDao.markToDeal(Integer.valueOf(id), classCode);
-		}else {
-			markResult = false;
-		}
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		if (markResult) {
-			map.put("result", "success");
+		if (id != null && !"".equals(id)) {
+			boolean markResult = opportunityDao.markToDeal(Integer.valueOf(id), classCode);
+			if (markResult) {
+				/** 如果标记成单成功，则为班级人数加1 **/
+				ShineClassDao shineClassDao = new ShineClassDaoImpl();
+				ShineClass shineClass = shineClassDao.getClassByClassCode(classCode).get(0);
+				shineClass.setCurrentNum(shineClass.getCurrentNum() + 1);
+				boolean setNumResult = shineClassDao.update(shineClass);
+				if (setNumResult) {
+					map.put("result", SUCCESS);
+				}else {
+					map.put("result", ERROR);
+				}
+			}else {
+				map.put("result", ERROR);
+			}
 		}else {
-			map.put("result", "fail");
+			map.put("result", ERROR);
 		}
 		result = JSONObject.toJSONString(map);
 		return SUCCESS;
