@@ -141,6 +141,11 @@
 				<param name="root">result</param>
 			</result>
 		</action>
+		<action name="followStu" class="com.shine.action.Action_FollowStu_Teacher" method="follow">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
 	</package>
 	<package name="manager" extends="json-default">
 		<action name="addClass" class="com.shine.action.Action_AddClassApplication_Manager" method="addClass">

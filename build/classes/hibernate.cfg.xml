@@ -18,5 +18,6 @@
 		<mapping resource="com/shine/dto/FollowContent.hbm.xml"/>
 		<mapping resource="com/shine/dto/ShineClass.hbm.xml"/>
 		<mapping resource="com/shine/dto/Application.hbm.xml"/>
+		<mapping resource="com/shine/dto/CallBackInfo.hbm.xml"/>
 	</session-factory> 
 </hibernate-configuration>

@@ -70,6 +70,7 @@ $(document).ready(function(){
 				
 				/** 展现学员信息详情  **/
 				tab.clear().draw(false);
+				var operation = "<button name=\"follow\" class=\"btn btn-primary\">跟进</button>";
 				for (var j = 0; j < studentInfoJson.length; j++) {
 					var obj = [	
 					           	studentInfoJson[j].id,
@@ -80,12 +81,66 @@ $(document).ready(function(){
 					           	studentInfoJson[j].contactTel2,
 					           	studentInfoJson[j].address,
 					           	studentInfoJson[j].school,
+					           	operation
 			           		];
 					tab.row.add(obj).draw(false);
 				}
 			},
 			error : function(e){
 				alert("系统出错！请联系管理员！");
+			}
+		});
+	});
+	
+	/** 跟进学员 **/
+	$("#mainTable").on("click","button[name='follow']",function(){
+		var td = $(this).parent();
+		var tr = $(td).parent();
+		var tds = $(tr).children();
+		$("#id-follow-td").text($(tds[0]).text());
+		$("#cnName-follow-td").text($(tds[1]).text());
+		$("#englishName-follow-td").text($(tds[2]).text());
+		$("#parentName-follow-td").text($(tds[3]).text());
+		$("#contactTel1-follow-td").text($(tds[4]).text());
+		$("#contactTel2-follow-td").text($(tds[5]).text());
+		$("#address-follow-td").text($(tds[6]).text());
+		$("#school-follow-td").text($(tds[7]).text());
+		
+		$("#followStuModal").modal({
+			keyboard : true
+		});
+	});
+	
+	/** 提交跟进内容 **/
+	$("#submitFollowStu").click(function(){
+		
+		var followContent = $("#followContent").val();
+		if (followContent == null || followContent == "") {
+			alert("跟进内容不能为空！");
+			return;
+		}
+		var param = {
+				'stuId' : $("#id-follow-td").text(),
+				'follower' : $("#nameShow").text().split(":")[1],
+				'followContent' : followContent
+		}
+		
+		$.ajax({
+			url : 'followStu.action',
+			type : 'post',
+			dataType : 'json',
+			data : param,
+			success : function(e){
+				var data = eval("(" + e + ")");
+				var result = data.result;
+				if (result == "success") {
+					alert("提交回访记录成功！");
+				}else {
+					alert("提交回访记录失败！");
+				}
+			},
+			error : function(e){
+				alert("系统错误！请联系管理员！");
 			}
 		});
 	});
@@ -228,6 +283,7 @@ $(document).ready(function(){
 				<th>联系方式2</th>
 				<th>家庭住址</th>
 				<th>就读学校</th>
+				<th>操作</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -242,6 +298,7 @@ $(document).ready(function(){
 				<th>联系方式2</th>
 				<th>家庭住址</th>
 				<th>就读学校</th>
+				<th>操作</th>
 			</tr>
 		</tfoot>
 	</table>
@@ -274,6 +331,56 @@ $(document).ready(function(){
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
         <button type="button" id="modifyPswButton" class="btn btn-primary">确认修改</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 跟进学员 -->
+<div class="modal fade" id="followStuModal" tabindex="-1" role="dialog" aria-labelledby="followStuLable">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="followStuLable">回访学员</h4>
+      </div>
+      <div class="modal-body"> 
+      	<table class="table table-bordered">
+      		<tr>
+      			<td>ID</td>
+      			<td id="id-follow-td"></td>
+      			<td>中文姓名</td>
+      			<td id="cnName-follow-td"></td>
+      		</tr>
+      		<tr>
+      			<td>英文姓名</td>
+      			<td id="englishName-follow-td"></td>
+      			<td>父母姓名</td>
+      			<td id="parentName-follow-td"></td>
+      		</tr>
+      		<tr>
+      			<td>联系方式1</td>
+      			<td id="contactTel1-follow-td"></td>
+      			<td>联系方式2</td>
+      			<td id="contactTel2-follow-td"></td>
+      		</tr>
+      		<tr>
+      			<td>家庭住址</td>
+      			<td id="address-follow-td"></td>
+      			<td>就读学校</td>
+      			<td id="school-follow-td"></td>
+      		</tr>
+      		<tr>
+      			<td>回访内容</td>
+      			<td colspan="3">
+      				<textarea id="followContent" style="width: 100%"></textarea>
+      			</td>
+      		</tr>
+      	</table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" id="submitFollowStu" class="btn btn-primary">提交</button>
       </div>
     </div>
   </div>
